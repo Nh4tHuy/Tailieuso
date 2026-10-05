@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng Thông Tin & Học Liệu Số Giáo Dục</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <meta name="robots" content="noindex, nofollow"/>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['"Quicksand"', '"Plus Jakarta Sans"', 'sans-serif'] 
+                    },
+                    colors: {
+                        pastel: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            300: '#7cc8fc',
+                            400: '#38acf8',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#082f49',
+                        },
+                        sunshine: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    },
+                    boxShadow: {
+                        'glass-sm': '0 4px 20px -2px rgba(2, 132, 199, 0.08), 0 2px 6px -1px rgba(2, 132, 199, 0.04)',
+                        'glass-md': '0 10px 30px -4px rgba(2, 132, 199, 0.12), 0 4px 12px -2px rgba(2, 132, 199, 0.06)',
+                        'glass-lg': '0 20px 45px -6px rgba(2, 132, 199, 0.2)',
+                        'glow': '0 0 24px rgba(2, 132, 199, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+        .dark .glass-panel {
+            background: rgba(12, 28, 48, 0.8);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(56, 172, 248, 0.2);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dark .glass-card {
+            background: rgba(15, 33, 58, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 172, 248, 0.18);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(2, 132, 199, 0.45);
+            box-shadow: 0 20px 35px -8px rgba(2, 132, 199, 0.22);
+        }
+        .dark .glass-card:hover {
+            border-color: rgba(124, 200, 252, 0.45);
+            box-shadow: 0 20px 35px -8px rgba(2, 132, 199, 0.32);
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+        }
+        .dark .glass-pill {
+            background: rgba(18, 41, 71, 0.7);
+            border: 1px solid rgba(56, 172, 248, 0.22);
+        }
+
+        /* Ambient floating shapes */
+        .floating-shapes {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            margin: 0; padding: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .floating-shapes li {
+            position: absolute; display: block; list-style: none;
+            width: 20px; height: 20px;
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.08);
+            animation: floatUp 24s linear infinite;
+            bottom: -150px; border-radius: 12px; backdrop-filter: blur(3px);
+            will-change: transform, opacity;
+        }
+        .dark .floating-shapes li {
+            background: rgba(56, 172, 248, 0.08);
+            border: 1px solid rgba(56, 172, 248, 0.2);
+        }
+        .floating-shapes li:nth-child(1) { left: 10%; width: 48px; height: 48px; animation-duration: 22s; border-radius: 50%; }
+        .floating-shapes li:nth-child(2) { left: 28%; width: 34px; height: 34px; animation-delay: 2s; animation-duration: 26s; }
+        .floating-shapes li:nth-child(3) { left: 52%; width: 56px; height: 56px; animation-delay: 4s; border-radius: 18px; }
+        .floating-shapes li:nth-child(4) { left: 75%; width: 32px; height: 32px; animation-duration: 18s; border-radius: 50%; }
+        .floating-shapes li:nth-child(5) { left: 88%; width: 44px; height: 44px; animation-delay: 3s; }
+
+        @keyframes floatUp {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translate3d(0, -1150px, 0) rotate(420deg); opacity: 0; }
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(25px, -30px, 0) scale(1.06); }
+        }
+        .orb-ambient {
+            position: absolute; border-radius: 50%; filter: blur(65px); pointer-events: none;
+            animation: floatOrb 20s ease-in-out infinite alternate;
+        }
+
+        #toastContainer {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            z-index: 100; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .toast-msg {
+            background: rgba(15, 23, 42, 0.94); color: white; padding: 10px 22px; border-radius: 99px;
+            font-size: 13px; font-weight: 700; box-shadow: 0 10px 25px -3px rgba(0,0,0,0.25);
+            animation: toastIn 0.25s forwards, toastOut 0.25s 2.7s forwards;
+            display: flex; align-items: center; gap: 8px; backdrop-filter: blur(8px);
+        }
+        @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
+    </style>
+</head>
+<body class="antialiased min-h-screen bg-gradient-to-br from-[#f0f9ff] via-[#e6f4fe] to-[#ddf0fd] dark:from-[#051324] dark:via-[#091e38] dark:to-[#08182d] text-slate-800 dark:text-slate-100 flex flex-col font-sans relative overflow-x-hidden selection:bg-pastel-200 selection:text-pastel-900">
+
+    <!-- Ambient glowing orbs & particles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div class="orb-ambient w-96 h-96 -top-24 -left-20 bg-sky-300/35 dark:bg-sky-900/25"></div>
+        <div class="orb-ambient w-[440px] h-[440px] top-1/3 -right-28 bg-amber-200/35 dark:bg-amber-950/20" style="animation-delay: -7s;"></div>
+        <div class="orb-ambient w-[480px] h-[480px] -bottom-32 left-1/4 bg-teal-200/30 dark:bg-cyan-950/25" style="animation-delay: -12s;"></div>
+    </div>
+
+    <!-- Floating shapes rising gently -->
+    <ul class="floating-shapes" aria-hidden="true">
+        <li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <!-- Toast container -->
+    <div id="toastContainer"></div>
+
+    <div class="relative z-10 flex flex-col flex-1 h-full w-full">
+        <!-- Top Navigation -->
+        <nav class="glass-panel sticky top-0 z-40 h-20 px-4 sm:px-8 lg:px-12 flex items-center justify-between shadow-glass-sm transition-all">
+            <!-- Brand & Identity -->
+            <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pastel-600 to-sky-400 flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-pastel-500/25 border border-white/70">
+                    <i class="ph-bold ph-compass"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Cổng Học Liệu Số</h1>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/50">Trang Chủ</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Trung tâm điều hướng kho tài nguyên điện tử</p>
+                </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="flex items-center gap-2.5">
+                <!-- Live Clock Widget -->
+                <div class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-pill text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-glass-sm">
+                    <i class="ph-bold ph-clock text-pastel-500 text-sm"></i>
+                    <span id="headerClock">--:--</span>
+                </div>
+
+                <!-- Help Button -->
+                <button onclick="openPortalInfoModal()" title="Giới thiệu & Hướng dẫn" class="w-11 h-11 rounded-2xl glass-panel flex items-center justify-center text-slate-600 dark:text-pastel-200 hover:text-pastel-600 dark:hover:text-white transition-all shadow-glass-sm hover:scale-105 active:scale-95">
+                    <i class="ph-bold ph-question text-xl text-amber-500"></i>
+                </button>
+
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" title="Chuyển chế độ sáng/tối" class="w-11 h-11 rounded-2xl glass-panel flex items-center justify-center text-slate-600 dark:text-pastel-200 hover:text-pastel-600 dark:hover:text-white transition-all shadow-glass-sm hover:scale-105 active:scale-95">
+                    <i class="ph-duotone ph-moon text-2xl dark:hidden text-slate-700"></i>
+                    <i class="ph-duotone ph-sun text-2xl hidden dark:block text-amber-300"></i>
+                </button>
+            </div>
+        </nav>
+
+        <main class="flex-1 flex flex-col max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            
+            <!-- Hero Header Banner -->
+            <div class="mb-10 p-6 sm:p-10 rounded-3xl glass-panel shadow-glass-md flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+                <div class="absolute -right-12 -bottom-12 w-56 h-56 rounded-full bg-pastel-400/20 blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pastel-100 dark:bg-pastel-950/70 border border-pastel-200 dark:border-pastel-800 text-xs font-bold text-pastel-700 dark:text-pastel-300 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Hệ thống phân phối tài nguyên tập trung</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">
+                        HỌC LIỆU SỐ <span class="text-pastel-500">CHUYÊN BIỆT</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2.5 leading-relaxed font-medium">
+                        Chọn phân hệ bạn muốn truy cập để tra cứu giáo án, slide bài giảng, hình ảnh và tài liệu chuyên môn đồng bộ trực tiếp từ đám mây.
+                    </p>
+                </div>
+
+                <div class="relative z-10 flex flex-row md:flex-col items-start md:items-end justify-between gap-3 border-t md:border-t-0 md:border-l border-white/60 dark:border-white/10 pt-4 md:pt-0 md:pl-8 shrink-0">
+                    <div class="text-left md:text-right">
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-pastel-600 dark:text-pastel-400">Trạng thái hạ tầng</p>
+                        <p class="text-sm font-bold text-slate-800 dark:text-white flex items-center md:justify-end gap-1.5 mt-0.5">
+                            <i class="ph-fill ph-check-circle text-emerald-500"></i> 2/2 Phân hệ hoạt động
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Google Drive API v3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Selection Cards (2 Apps) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                
+                <!-- CARD 1: Lớp 2 (Data.html) -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group border border-white/80 dark:border-pastel-400/20 shadow-glass-md">
+                    <!-- Accent background glow -->
+                    <div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-sky-400/10 dark:bg-sky-400/5 blur-2xl group-hover:bg-sky-400/20 transition-all pointer-events-none"></div>
+
+                    <div>
+                        <!-- Header badge & icon -->
+                        <div class="flex items-start justify-between gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-500 to-pastel-400 text-white flex items-center justify-center text-3xl shadow-lg shadow-sky-500/25 border border-white/50 group-hover:scale-105 transition-transform">
+                                <i class="ph-fill ph-student"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-sky-100 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                                Tiểu Học
+                            </span>
+                        </div>
+
+                        <!-- Title and subtitle -->
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-pastel-600 dark:group-hover:text-pastel-400 transition-colors">
+                            Tài Nguyên & Bài Giảng Lớp 2
+                        </h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-6">
+                            Kho học liệu chuyên đề khối Lớp 2 bao gồm giáo án, slide bài giảng môn Tiếng Việt, Toán và tài liệu bổ trợ, hỗ trợ xem trước và tải tức thời.
+                        </p>
+
+                        <!-- Key Feature highlights -->
+                        <div class="space-y-2.5 mb-8">
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-book-open-text"></i>
+                                </div>
+                                <span>Chuyên mục chính: Tiếng Việt, Toán Lớp 2</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-file-ppt"></i>
+                                </div>
+                                <span>Tập tin PowerPoint, Word giáo án, PDF xem trực tiếp</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-table"></i>
+                                </div>
+                                <span>Hỗ trợ 2 chế độ Bảng và Lưới ô vuông linh hoạt</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-5 border-t border-white/60 dark:border-white/10">
+                        <a id="btnApp1" href="Data.html" class="w-full py-3.5 px-5 rounded-2xl bg-pastel-500 hover:bg-pastel-600 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-pastel-500/25 active:scale-95 transition-all group-hover:shadow-pastel-500/40">
+                            <span>Truy cập Tài Nguyên Lớp 2</span>
+                            <i class="ph-bold ph-arrow-right text-base"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Mầm Non (Kho tài liệu.html) -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group border border-white/80 dark:border-pastel-400/20 shadow-glass-md">
+                    <!-- Accent background glow -->
+                    <div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-amber-400/10 dark:bg-amber-400/5 blur-2xl group-hover:bg-amber-400/20 transition-all pointer-events-none"></div>
+
+                    <div>
+                        <!-- Header badge & icon -->
+                        <div class="flex items-start justify-between gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-400 text-white flex items-center justify-center text-3xl shadow-lg shadow-amber-500/25 border border-white/50 group-hover:scale-105 transition-transform">
+                                <i class="ph-fill ph-baby"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                                Mầm Non Mỹ An
+                            </span>
+                        </div>
+
+                        <!-- Title and subtitle -->
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
+                            Kho Học Liệu Mầm Non
+                        </h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-6">
+                            Hệ thống tài liệu, kế hoạch giáo dục, biên bản chuyên môn và kho tranh ảnh mầm non phục vụ cho đội ngũ cán bộ, giáo viên Trường Mầm Non Mỹ An.
+                        </p>
+
+                        <!-- Key Feature highlights -->
+                        <div class="space-y-2.5 mb-8">
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-folders"></i>
+                                </div>
+                                <span>Phân loại theo Chủ đề giáo dục và kế hoạch tuần</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-image"></i>
+                                </div>
+                                <span>Kho tranh ảnh minh họa, tài liệu Word/Excel kế hoạch</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-magnifying-glass"></i>
+                                </div>
+                                <span>Tìm kiếm thông minh không dấu & xem trước không tải file</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-5 border-t border-white/60 dark:border-white/10">
+                        <a id="btnApp2" href="Kho tài liệu.html" class="w-full py-3.5 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-amber-500/25 active:scale-95 transition-all group-hover:shadow-amber-500/40">
+                            <span>Truy cập Kho Mầm Non</span>
+                            <i class="ph-bold ph-arrow-right text-base"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Quick Features Overview Grid -->
+            <div class="mb-10">
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <h4 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Tính Năng Nổi Bật Của Hệ Thống</h4>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Cả hai phân hệ đều được thiết kế tối ưu hóa tốc độ và trải nghiệm người dùng</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="ph-bold ph-cloud-arrow-down"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Đồng bộ tự động</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Dữ liệu liên tục cập nhật theo Google Apps Script.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="ph-bold ph-eye"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Xem trước an toàn</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Xem file trực tiếp trên trình duyệt mà không cần tải về máy.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="ph-bold ph-funnel"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Bộ lọc đa định dạng</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Phân loại tức thời Word, Excel, PPT, PDF, Hình ảnh.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="ph-bold ph-moon-stars"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Chế độ Sáng / Tối</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Bảo vệ mắt khi nghiên cứu giáo án vào ban đêm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="glass-panel border-t border-white/60 dark:border-white/10 mt-auto py-8 transition-colors">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-pastel-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                        <i class="ph-bold ph-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">Hệ Thống Kho Tài Liệu Số</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Trang chủ trung gian điều hướng học liệu</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                    <button onclick="openPortalInfoModal()" class="hover:text-pastel-500 transition-colors">Hướng dẫn sử dụng</button>
+                    <span>•</span>
+                    <span class="text-slate-400 dark:text-slate-500 font-medium">Nh4tHuy</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MODAL: PORTAL INFO & GUIDE -->
+    <div id="infoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden bg-slate-950/50 opacity-0 transition-opacity backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-lg rounded-3xl overflow-hidden shadow-glass-lg relative border border-white/80 dark:border-pastel-400/20 transform scale-95 opacity-0 transition-all duration-300" id="infoModalContent">
+            
+            <div class="p-6 bg-gradient-to-r from-amber-500 to-pastel-600 text-white relative">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-2xl border border-white/30">
+                        <i class="ph-bold ph-info"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Giới Thiệu Cổng Học Liệu</h3>
+                        <p class="text-xs text-white/80">Hướng dẫn sử dụng trang chủ trung gian</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('infoModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                <div class="p-3.5 rounded-2xl bg-pastel-50/70 dark:bg-pastel-950/40 border border-pastel-200/50 dark:border-pastel-800/50 leading-relaxed font-medium">
+                    Trang chủ trung gian này đóng vai trò làm điểm truy cập duy nhất (Single Access Point) giúp quý thầy cô và cán bộ quản lý dễ dàng di chuyển giữa 2 kho học liệu mà không cần phải nhớ riêng từng đường link phức tạp.
+                </div>
+
+                <div class="space-y-2">
+                    <h5 class="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs">Cách truy cập:</h5>
+                    <ul class="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400">
+                        <li><b>Nhấp chọn phân hệ:</b> Bấm vào nút truy cập ở từng thẻ để vào thẳng kho học liệu tương ứng.</li>
+                        <li><b>Tùy biến URL:</b> Bạn có thể thay đổi đường dẫn trực tiếp tại biến <code class="font-mono bg-pastel-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-pastel-700 dark:text-pastel-300">URL_APP1</code> và <code class="font-mono bg-pastel-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-amber-700 dark:text-amber-300">URL_APP2</code> trong mã nguồn thẻ script.</li>
+                    </ul>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="closeModal('infoModal')" class="w-full py-3 rounded-2xl bg-pastel-500 hover:bg-pastel-600 text-white font-bold text-xs sm:text-sm transition-all shadow-sm">
+                        Đã hiểu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // CẤU HÌNH ĐƯỜNG DẪN 2 ỨNG DỤNG TRỰC TIẾP TẠI ĐÂY:
+        // Bạn có thể điền tên file cục bộ (Data.html) hoặc liên kết hosting (https://...)
+        // =========================================================================
+        const URL_APP1 = 'Data.html';         // Đường dẫn Web App Lớp 2
+        const URL_APP2 = 'Kho tài liệu.html'; // Đường dẫn Web App Mầm Non
+
+        // Gán link động cho các nút truy cập
+        const btnApp1 = document.getElementById('btnApp1');
+        const btnApp2 = document.getElementById('btnApp2');
+        if (btnApp1) btnApp1.href = URL_APP1;
+        if (btnApp2) btnApp2.href = URL_APP2;
+
+        // Dark mode toggle listener
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            const clockEl = document.getElementById('headerClock');
+            if (clockEl) clockEl.textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Modal open / close animations
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(modalId + 'Content');
+            if (!modal || !modalContent) return;
+
+            modal.classList.remove('hidden');
+            void modal.offsetWidth; 
+            
+            modal.style.opacity = '1';
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(modalId + 'Content');
+            if (!modal || !modalContent) return;
+            
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            modal.style.opacity = '0';
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 220);
+        }
+
+        function openPortalInfoModal() {
+            openModal('infoModal');
+        }
+
+        // Close on clicking backdrop
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('infoModal')) {
+                closeModal('infoModal');
+            }
+        };
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('infoModal');
+            }
+        });
+    </script>
+</body>
+</html>
