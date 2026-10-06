@@ -253,7 +253,7 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <h1 class="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Tài liệu số</h1>
-                        <a href="/"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700/50">Drive</span></a>
+                        <a href="/" title="Quay về trang chủ"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700/50 hover:bg-amber-200 transition-colors">Drive</span></a>
                      </div>
                     <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Kho tài nguyên, kế hoạch theo từng năm học</p>
                 </div>
@@ -283,7 +283,7 @@
                 <!-- Status Badge -->
                 <div class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full glass-pill text-xs font-semibold text-pastel-800 dark:text-pastel-200 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Online</span>
+                    <span id="cacheSyncIndicator">Online</span>
                 </div>
 
                 <!-- Theme Toggle Button -->
@@ -301,7 +301,6 @@
                 <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-pastel-400/20 blur-2xl pointer-events-none"></div>
 
                 <div class="relative z-10 max-w-2xl">
-                    
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">
                         TÀI LIỆU SỐ <span class="text-pastel-500">4.0</span>
                     </h2>
@@ -313,7 +312,7 @@
                 <div class="relative z-10 flex flex-row md:flex-col items-start md:items-end justify-between gap-2.5 border-t md:border-t-0 md:border-l border-white/60 dark:border-white/10 pt-4 md:pt-0 md:pl-6 shrink-0">
                     <div class="text-left md:text-right">
                         <p class="text-[11px] font-bold uppercase tracking-widest text-pastel-600 dark:text-pastel-400">Đồng bộ Google Drive</p>
-                        <p class="text-sm font-bold text-slate-800 dark:text-white flex items-center md:justify-end gap-1.5 mt-0.5">
+                        <p id="driveSyncStatusText" class="text-sm font-bold text-slate-800 dark:text-white flex items-center md:justify-end gap-1.5 mt-0.5">
                             <i class="ph-fill ph-check-circle text-emerald-500"></i> Dữ liệu mới nhất
                         </p>
                     </div>
@@ -612,8 +611,6 @@
 
                 <!-- Các bước hướng dẫn sử dụng -->
                 <div class="space-y-3.5 text-xs sm:text-sm">
-                    
-
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <!-- Hướng dẫn 1: Tìm kiếm -->
                         <div class="p-3.5 rounded-2xl glass-pill border border-white/70 dark:border-pastel-400/10 space-y-1.5">
@@ -661,8 +658,6 @@
                     </div>
                 </div>
 
-                
-
                 <div class="pt-2">
                     <button onclick="acknowledgeWelcome()" class="w-full py-3.5 px-4 rounded-2xl font-bold bg-pastel-500 hover:bg-pastel-600 text-white flex items-center justify-center gap-2 transition-all shadow-md shadow-pastel-500/25 text-sm hover:scale-[1.01] active:scale-[0.98]">
                         <i class="ph-bold ph-check"></i> Bắt đầu sử dụng
@@ -675,7 +670,7 @@
     <script>
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5Bg2LjPzA0ERSlwQ5aiO9Yg4J4l_10K9GUASa4gdz6WZIacuvgDzzzkJa0FunHE-k/exec';
         const CACHE_STORAGE_KEY = 'drive_cache_mn';
-        const CACHE_TTL_MS = 8 * 60 * 1000; // 8 phút cache
+        const CACHE_TTL_MS = 15 * 60 * 1000; // Tăng hiệu lực bộ nhớ đệm lên 15 phút
 
         let globalData = [];
         let byIdMap = new Map();
@@ -698,6 +693,7 @@
 
         function showToast(message, isError = false) {
             const container = document.getElementById('toastContainer');
+            if (!container) return;
             const toast = document.createElement('div');
             toast.className = 'toast-msg';
             toast.innerHTML = (isError 
@@ -763,29 +759,61 @@
             return folderMap.get(parentId) || 'Thư mục gốc';
         }
 
+        // Đọc dữ liệu từ bộ nhớ đệm localStorage (tương thích tuyệt đối với Widget.html) hoặc sessionStorage
+        function readStoredCache() {
+            try {
+                // Ưu tiên đọc từ localStorage - nơi Widget.html đã nạp sẵn (prefetch)
+                const raw = localStorage.getItem(CACHE_STORAGE_KEY) || sessionStorage.getItem(CACHE_STORAGE_KEY);
+                if (!raw) return null;
+
+                const parsed = JSON.parse(raw);
+                const timeStr = localStorage.getItem(`${CACHE_STORAGE_KEY}_time`) || (parsed && parsed.timestamp);
+                const timestamp = timeStr ? parseInt(timeStr, 10) : 0;
+
+                let items = null;
+                if (Array.isArray(parsed)) {
+                    items = parsed;
+                } else if (parsed && Array.isArray(parsed.data)) {
+                    items = parsed.data;
+                }
+
+                if (items && items.length > 0) {
+                    return { items, timestamp };
+                }
+            } catch (e) {
+                console.warn("Lỗi phân giải bộ nhớ đệm:", e);
+            }
+            return null;
+        }
+
         async function loadData(forceRefresh = false) {
             const refreshIcon = document.getElementById('refreshIcon');
             if (refreshIcon) refreshIcon.classList.add('spin');
 
+            // 1. KIỂM TRA BỘ NHỚ ĐỆM PREFETCH: Mở tức thì 0 mili-giây không cần chờ loading
             if (!forceRefresh) {
-                try {
-                    const cachedRaw = sessionStorage.getItem(CACHE_STORAGE_KEY);
-                    if (cachedRaw) {
-                        const parsedCache = JSON.parse(cachedRaw);
-                        if (parsedCache.timestamp && (Date.now() - parsedCache.timestamp < CACHE_TTL_MS)) {
-                            processAndIndexData(parsedCache.data);
-                            renderView();
-                            showLoading(false);
-                            if (refreshIcon) refreshIcon.classList.remove('spin');
-                            fetchBackgroundData();
-                            return;
-                        }
+                const cached = readStoredCache();
+                if (cached && cached.items && cached.items.length > 0) {
+                    processAndIndexData(cached.items);
+                    renderView();
+                    showLoading(false);
+                    if (refreshIcon) refreshIcon.classList.remove('spin');
+
+                    const isStillFresh = cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL_MS);
+                    const indicator = document.getElementById('cacheSyncIndicator');
+                    if (indicator) indicator.textContent = 'Mở tức thì (Cache)';
+
+                    // Nếu cache còn hạn, không cần gọi mạng; nếu đã qua thời hạn thì làm mới ngầm (Stale-While-Revalidate)
+                    if (isStillFresh) {
+                        return;
+                    } else {
+                        fetchBackgroundData();
+                        return;
                     }
-                } catch(e) {
-                    console.warn("Lỗi đọc cache:", e);
                 }
             }
 
+            // 2. NẾU CHƯA CÓ CACHE: Hiển thị skeleton và gọi mạng trực tiếp
             if (globalData.length === 0) {
                 renderSkeletonPlaceholders();
             }
@@ -797,14 +825,18 @@
                     mode: 'cors',
                     headers: { 'Accept': 'application/json' }
                 });
-                if (!response.ok) throw new Error('Không thể kết nối đến máy chủ');
+                if (!response.ok) throw new Error('Không thể kết nối đến máy chủ Google Apps Script');
                 
                 const rawData = await response.json();
                 const items = rawData.data ? rawData.data : (Array.isArray(rawData) ? rawData : []);
                 
                 processAndIndexData(items);
 
+                // Đồng bộ cache vào cả localStorage (chuẩn của Widget) và sessionStorage
                 try {
+                    const now = String(Date.now());
+                    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(rawData));
+                    localStorage.setItem(`${CACHE_STORAGE_KEY}_time`, now);
                     sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
                         timestamp: Date.now(),
                         data: items
@@ -818,7 +850,7 @@
                 if (globalData.length === 0) {
                     const loadingText = document.querySelector('#loadingOverlay p');
                     if (loadingText) {
-                        loadingText.textContent = "Không thể tải dữ liệu. Vui lòng kiểm tra lại kết nối.";
+                        loadingText.textContent = "Không thể tải dữ liệu. Vui lòng kiểm tra lại kết nối mạng.";
                         loadingText.classList.add("text-rose-500");
                     }
                 } else {
@@ -838,10 +870,14 @@
                 const freshItems = raw.data ? raw.data : (Array.isArray(raw) ? raw : []);
                 if (freshItems.length > 0) {
                     processAndIndexData(freshItems);
+                    const now = String(Date.now());
+                    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(raw));
+                    localStorage.setItem(`${CACHE_STORAGE_KEY}_time`, now);
                     sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
                         timestamp: Date.now(),
                         data: freshItems
                     }));
+                    renderView();
                 }
             } catch (e) { }
         }
@@ -1029,7 +1065,6 @@
             if (currentSearchQuery) renderView();
         }
 
-        // HÀM TÌM KIẾM ĐỘC LẬP: CHỈ THỰC HIỆN KHI NHẤP NÚT HOẶC ẤN ENTER
         function executeSearch() {
             const input = document.getElementById('searchInput');
             const val = input.value.trim();
@@ -1495,59 +1530,18 @@
 
         function checkFirstVisit() {
             const hasSeen = localStorage.getItem('hasSeenAdminNotice_kidedu');
-            detectVisitorInfo();
             if (!hasSeen) {
                 setTimeout(() => openWelcomeModal(false), 500);
             }
         }
 
         function openWelcomeModal(isManual = false) {
-            detectVisitorInfo();
             openModal('welcomeModal');
         }
 
         function acknowledgeWelcome() {
             localStorage.setItem('hasSeenAdminNotice_kidedu', 'true');
             closeModal('welcomeModal');
-        }
-
-        function detectVisitorInfo() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' - ' + now.toLocaleDateString('vi-VN');
-            const timeEl = document.getElementById('visitorTime');
-            if (timeEl) timeEl.textContent = timeStr;
-
-            const ipEl = document.getElementById('visitorIp');
-            fetch('https://api.ipify.org?format=json')
-                .then(res => res.json())
-                .then(data => {
-                    if (ipEl) ipEl.textContent = data.ip || 'Bảo mật mạng nội bộ';
-                })
-                .catch(() => {
-                    if (ipEl) ipEl.textContent = 'Trường mầm non (Bảo mật)';
-                });
-
-            const ua = navigator.userAgent;
-            let browser = "Khác", os = "Khác";
-
-            if (ua.indexOf("Firefox") > -1) browser = "Mozilla Firefox";
-            else if (ua.indexOf("SamsungBrowser") > -1) browser = "Samsung Internet";
-            else if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) browser = "Opera";
-            else if (ua.indexOf("Edg") > -1) browser = "Microsoft Edge";
-            else if (ua.indexOf("Chrome") > -1) browser = "Google Chrome";
-            else if (ua.indexOf("Safari") > -1) browser = "Apple Safari";
-
-            if (ua.indexOf("Win") > -1) os = "Máy tính Windows";
-            else if (ua.indexOf("Mac") > -1) os = "macOS / iPad / iPhone";
-            else if (ua.indexOf("Android") > -1) os = "Thiết bị Android";
-            else if (ua.indexOf("Linux") > -1) os = "Hệ điều hành Linux";
-
-            const screenRes = `${window.screen.width}x${window.screen.height}`;
-            const browserEl = document.getElementById('visitorBrowser');
-            const osEl = document.getElementById('visitorOS');
-
-            if (browserEl) browserEl.textContent = browser;
-            if (osEl) osEl.textContent = `${os} (${screenRes})`;
         }
 
         window.onclick = function(e) {
