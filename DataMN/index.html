@@ -801,7 +801,7 @@
 
                     const isStillFresh = cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL_MS);
                     const indicator = document.getElementById('cacheSyncIndicator');
-                    if (indicator) indicator.textContent = 'Mở tức thì (Cache)';
+                    if (indicator) indicator.textContent = 'Online';
 
                     // Nếu cache còn hạn, không cần gọi mạng; nếu đã qua thời hạn thì làm mới ngầm (Stale-While-Revalidate)
                     if (isStillFresh) {
