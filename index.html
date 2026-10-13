@@ -207,7 +207,7 @@
                         <h1 class="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Cổng Tài Liệu Số</h1>
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/50">Trang Chủ</span>
                     </div>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Trung tâm điều hướng & tăng tốc tài nguyên số</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Trung tâm điều hướng & trợ lý AI giáo dục</p>
                 </div>
             </div>
 
@@ -242,29 +242,28 @@
                 <div class="relative z-10 max-w-2xl">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-pastel-100/90 dark:bg-pastel-950/70 text-pastel-700 dark:text-pastel-300 border border-pastel-200 dark:border-pastel-800 mb-3.5">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                        Hệ Thống Lưu Trữ Đám Mây
+                        Hệ Thống Số Hóa & Trí Tuệ Nhân Tạo
                     </div>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">
-                        TRUNG TÂM <span class="text-pastel-500">TÀI LIỆU SỐ</span>
+                        TRUNG TÂM <span class="text-pastel-500">TÀI LIỆU & AI SƯ PHẠM</span>
                     </h2>
                     <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2.5 leading-relaxed font-medium">
-                        Hệ thống tài nguyên điện tử đồng bộ đám mây từ Google Drive.
+                        Hệ thống kho tài liệu đồng bộ đám mây tích hợp trợ lý AI soạn giảng và thẩm định giáo án mầm non.
                     </p>
                 </div>
 
                 <div class="relative z-10 flex flex-row md:flex-col items-start md:items-end justify-between gap-3 border-t md:border-t-0 md:border-l border-white/60 dark:border-white/10 pt-4 md:pt-0 md:pl-8 shrink-0">
                     <div class="text-left md:text-right">
-                        <p class="text-[11px] font-bold uppercase tracking-widest text-pastel-600 dark:text-pastel-400">Bộ nhớ đệm</p>
-                        <p id="cacheStatusBadge" class="text-sm font-bold text-slate-800 dark:text-white flex items-center md:justify-end gap-1.5 mt-0.5">
-                            <i class="ph-bold ph-spinner animate-spin text-pastel-500"></i> Đang tải trước...
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-pastel-600 dark:text-pastel-400">Trạng thái kết nối</p>
+                        <p id="systemStatusBadge" class="text-sm font-bold text-slate-800 dark:text-white flex items-center md:justify-end gap-1.5 mt-0.5">
+                            <i class="ph-fill ph-check-circle text-emerald-500"></i> Hệ thống sẵn sàng
                         </p>
                     </div>
-                    
                 </div>
             </div>
 
-            <!-- Application Selection Cards (2 Apps) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Application Selection Cards Grid (4 Apps) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 
                 <!-- CARD 1: Lớp 2 (DataTH) -->
                 <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group border border-white/80 dark:border-pastel-400/20 shadow-glass-md">
@@ -280,8 +279,8 @@
                                 <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-sky-100 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                                     Tiểu Học Mỹ An
                                 </span>
-                                <span id="app1PrefetchBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 flex items-center gap-1">
-                                    <i class="ph-bold ph-arrows-clockwise animate-spin"></i> Chờ prefetch...
+                                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 flex items-center gap-1">
+                                    <i class="ph-bold ph-check text-emerald-500"></i> Sẵn sàng truy cập
                                 </span>
                             </div>
                         </div>
@@ -310,9 +309,9 @@
                             </div>
                             <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                                 <div class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 flex items-center justify-center shrink-0">
-                                    <i class="ph-bold ph-lightning"></i>
+                                    <i class="ph-bold ph-cloud-arrow-down"></i>
                                 </div>
-                                <span>Khởi chạy tức thì: <span id="app1CacheSize" class="text-pastel-600 dark:text-pastel-400 font-bold">0 KB</span></span>
+                                <span>Truy xuất dữ liệu trực tiếp Google Drive</span>
                             </div>
                         </div>
                     </div>
@@ -320,7 +319,7 @@
                     <!-- Action Button -->
                     <div class="pt-5 border-t border-white/60 dark:border-white/10">
                         <a id="btnApp1" href="/DataTH" class="w-full py-3.5 px-5 rounded-2xl bg-pastel-500 hover:bg-pastel-600 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-pastel-500/25 active:scale-95 transition-all group-hover:shadow-pastel-500/40">
-                            <span>Truy cập Tài Nguyên & Bài Giảng Lớp 2</span>
+                            <span>Truy cập Tài Nguyên Lớp 2</span>
                             <i class="ph-bold ph-arrow-right text-base"></i>
                         </a>
                     </div>
@@ -334,14 +333,14 @@
                         <!-- Header badge & icon -->
                         <div class="flex items-start justify-between gap-4 mb-6">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-400 text-white flex items-center justify-center text-3xl shadow-lg shadow-amber-500/25 border border-white/50 group-hover:scale-105 transition-transform">
-                                <i class="ph-fill ph-baby"></i>
+                                <i class="ph-fill ph-file"></i>
                             </div>
                             <div class="flex flex-col items-end gap-1.5">
                                 <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                                     Mầm Non Mỹ An
                                 </span>
-                                <span id="app2PrefetchBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 flex items-center gap-1">
-                                    <i class="ph-bold ph-arrows-clockwise animate-spin"></i> Chờ prefetch...
+                                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 flex items-center gap-1">
+                                    <i class="ph-bold ph-check text-emerald-500"></i> Sẵn sàng truy cập
                                 </span>
                             </div>
                         </div>
@@ -370,9 +369,9 @@
                             </div>
                             <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                                 <div class="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 flex items-center justify-center shrink-0">
-                                    <i class="ph-bold ph-lightning"></i>
+                                    <i class="ph-bold ph-cloud-arrow-down"></i>
                                 </div>
-                                <span>Khởi chạy tức thì: <span id="app2CacheSize" class="text-amber-600 dark:text-amber-400 font-bold">0 KB</span></span>
+                                <span>Truy xuất dữ liệu trực tiếp Google Drive</span>
                             </div>
                         </div>
                     </div>
@@ -380,7 +379,127 @@
                     <!-- Action Button -->
                     <div class="pt-5 border-t border-white/60 dark:border-white/10">
                         <a id="btnApp2" href="/DataMN" class="w-full py-3.5 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-amber-500/25 active:scale-95 transition-all group-hover:shadow-amber-500/40">
-                            <span>Truy cập Tài Nguyên Năm Học Mầm Non</span>
+                            <span>Truy cập Tài Nguyên Mầm Non</span>
+                            <i class="ph-bold ph-arrow-right text-base"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 3: AI Viết Giáo Án (GiaoAn.html) -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group border border-white/80 dark:border-emerald-400/20 shadow-glass-md">
+                    <div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-emerald-400/10 dark:bg-emerald-400/5 blur-2xl group-hover:bg-emerald-400/20 transition-all pointer-events-none"></div>
+
+                    <div>
+                        <!-- Header badge & icon -->
+                        <div class="flex items-start justify-between gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-emerald-400 text-white flex items-center justify-center text-3xl shadow-lg shadow-emerald-500/25 border border-white/50 group-hover:scale-105 transition-transform">
+                                <i class="ph-fill ph-magic-wand"></i>
+                            </div>
+                            <div class="flex flex-col items-end gap-1.5">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                    WIKYAI - Soạn Giảng
+                                </span>
+                                <span id="app3PrefetchBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 flex items-center gap-1">
+                                    <i class="ph-bold ph-check"></i> Trợ lý Sẵn sàng
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Title and subtitle -->
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            AI Viết Giáo Án Mầm Non
+                        </h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-6">
+                            Tự động biên soạn KHGD Chủ Đề, Tuần & Giáo Án Chi Tiết Ngày theo chuẩn Mầm Non Mỹ An.
+                        </p>
+
+                        <!-- Key Feature highlights -->
+                        <div class="space-y-2.5 mb-8">
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-sparkle"></i>
+                                </div>
+                                <span>Lập KHGD Chủ đề, Tuần và Chi tiết Ngày tự động</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-chats-teardrop"></i>
+                                </div>
+                                <span>Xây dựng kịch bản lời thoại Cô - Trẻ sinh động</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-paperclip"></i>
+                                </div>
+                                <span>Nhập tệp Kế hoạch mẫu (.docx, .pdf, .txt)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-5 border-t border-white/60 dark:border-white/10">
+                        <a id="btnApp3" href="/GiaoAn" class="w-full py-3.5 px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-emerald-600/25 active:scale-95 transition-all group-hover:shadow-emerald-600/40">
+                            <span>Truy cập AI Viết Giáo Án</span>
+                            <i class="ph-bold ph-arrow-right text-base"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 4: AI Thẩm Định Giáo Án -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group border border-white/80 dark:border-rose-400/20 shadow-glass-md">
+                    <div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-rose-400/10 dark:bg-rose-400/5 blur-2xl group-hover:bg-rose-400/20 transition-all pointer-events-none"></div>
+
+                    <div>
+                        <!-- Header badge & icon -->
+                        <div class="flex items-start justify-between gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 via-rose-500 to-pink-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-rose-500/25 border border-white/50 group-hover:scale-105 transition-transform">
+                                <i class="ph-fill ph-seal-check"></i>
+                            </div>
+                            <div class="flex flex-col items-end gap-1.5">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                                    WIKYAI - Thẩm Định
+                                </span>
+                                <span id="app4PrefetchBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 flex items-center gap-1">
+                                    <i class="ph-bold ph-check"></i> Đang cập nhật
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Title and subtitle -->
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                            AI Thẩm Định Giáo Án
+                        </h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-6">
+                            Công cụ AI phân tích, thẩm định tính chuẩn xác sư phạm và đánh giá chất lượng bài giảng.
+                        </p>
+
+                        <!-- Key Feature highlights -->
+                        <div class="space-y-2.5 mb-8">
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-clipboard-text"></i>
+                                </div>
+                                <span>Phân tích tính sư phạm & mức đáp ứng chuẩn GDMN</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-lightbulb"></i>
+                                </div>
+                                <span>Gợi ý bổ sung STEAM, SEL & Lấy trẻ làm trung tâm</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                                <div class="w-6 h-6 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0">
+                                    <i class="ph-bold ph-check-circle"></i>
+                                </div>
+                                <span>Đánh giá chi tiết điểm mạnh & điểm cần hoàn thiện</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-5 border-t border-white/60 dark:border-white/10">
+                        <a id="btnApp4" href="/ThamDinh" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-purple-600 to-rose-600 hover:from-purple-700 hover:to-rose-700 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-glass-sm shadow-rose-500/25 active:scale-95 transition-all group-hover:shadow-rose-500/40">
+                            <span>Đang cập nhật</span>
                             <i class="ph-bold ph-arrow-right text-base"></i>
                         </a>
                     </div>
@@ -392,7 +511,7 @@
             <div class="mb-10">
                 <div class="text-center max-w-xl mx-auto mb-8">
                     <h4 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Tính Năng Nổi Bật</h4>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Web app đồng bộ đến Google Drive được tối ưu hóa tốc độ và trải nghiệm người dùng</p>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Hệ thống đồng bộ Google Drive & Trí tuệ nhân tạo hỗ trợ tối đa cho Giáo viên</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -408,21 +527,21 @@
 
                     <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
                         <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl shrink-0">
-                            <i class="ph-bold ph-eye"></i>
+                            <i class="ph-bold ph-sparkle"></i>
                         </div>
                         <div>
-                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Xem trước an toàn</h5>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Xem file trực tiếp trên trình duyệt mà không cần tải về máy.</p>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Trợ lý AI Thông Minh</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Biên soạn và thẩm định giáo án tự động theo tiêu chuẩn GDMN.</p>
                         </div>
                     </div>
 
                     <div class="glass-panel p-5 rounded-2xl flex items-start gap-3.5 shadow-glass-sm">
                         <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl shrink-0">
-                            <i class="ph-bold ph-funnel"></i>
+                            <i class="ph-bold ph-eye"></i>
                         </div>
                         <div>
-                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Bộ lọc đa định dạng</h5>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Phân loại tức thời các định dạng Word, Excel, PPT, PDF, Hình ảnh.</p>
+                            <h5 class="font-bold text-sm text-slate-900 dark:text-white">Xem trước an toàn</h5>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Xem file trực tiếp trên trình duyệt mà không cần tải về máy.</p>
                         </div>
                     </div>
 
@@ -447,17 +566,17 @@
                             Tiện Ích Web App
                         </h4>
                         <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                            Theo dõi tốc độ đường truyền Google Cloud, độ trễ Ping và tiến trình lưu tài nguyên
+                            Theo dõi tốc độ đường truyền Google Cloud và độ trễ phản hồi thời gian thực
                         </p>
                     </div>
-                    <button onclick="refreshAllPrefetch()" title="Tải lại và đo tốc độ" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-panel text-xs font-bold text-pastel-600 dark:text-pastel-300 hover:bg-pastel-500 hover:text-white transition-all shadow-sm">
+                    <button onclick="refreshMetrics()" title="Kiểm tra lại tốc độ" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-panel text-xs font-bold text-pastel-600 dark:text-pastel-300 hover:bg-pastel-500 hover:text-white transition-all shadow-sm">
                         <i class="ph-bold ph-arrows-clockwise" id="refreshMetricsIcon"></i>
                         <span>Kiểm tra lại</span>
                     </button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <!-- Widget 1: Tốc độ mạng & Latency (Độ trễ truyền dữ liệu) -->
+                    <!-- Widget 1: Tốc độ mạng & Latency -->
                     <div class="glass-panel p-5 rounded-3xl relative overflow-hidden shadow-glass-sm border border-white/80 dark:border-pastel-400/20">
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Tốc độ mạng</span>
@@ -477,12 +596,12 @@
                             <div id="speedProgressBar" class="bg-gradient-to-r from-emerald-400 to-pastel-500 h-2 rounded-full transition-all duration-700" style="width: 85%;"></div>
                         </div>
                         <div class="flex justify-between items-center text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-2">
-                            <span>Tốc độ truyền tải:</span>
-                            <span id="metricThroughput" class="font-bold text-pastel-600 dark:text-pastel-400">Đang đo...</span>
+                            <span>Truy xuất dữ liệu:</span>
+                            <span id="metricThroughput" class="font-bold text-pastel-600 dark:text-pastel-400">Trực tiếp (Live Cloud)</span>
                         </div>
                     </div>
 
-                    <!-- Widget 2: Thời gian thực chi tiết (Lịch số & Ngày giờ) -->
+                    <!-- Widget 2: Thời gian thực chi tiết -->
                     <div class="glass-panel p-5 rounded-3xl relative overflow-hidden shadow-glass-sm border border-white/80 dark:border-pastel-400/20">
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Thời gian thực</span>
@@ -504,24 +623,23 @@
                         </div>
                     </div>
 
-                    <!-- Widget 3: Dung lượng Cache nạp trước (Prefetch Status) -->
+                    <!-- Widget 3: Trạng thái đám mây -->
                     <div class="glass-panel p-5 rounded-3xl relative overflow-hidden shadow-glass-sm border border-white/80 dark:border-pastel-400/20">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Bộ nhớ đệm</span>
-                            <span id="storageStateBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-pastel-100 dark:bg-pastel-950/70 text-pastel-700 dark:text-pastel-300">
-                                Sẵn sàng
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Trạng thái đám mây</span>
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300">
+                                Hoạt động
                             </span>
                         </div>
                         <div class="flex items-baseline gap-2 mb-2">
-                            <span id="totalCacheSizeText" class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">0.00</span>
-                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">KB trên web</span>
+                            <span class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Google Cloud</span>
                         </div>
                         <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-                            Dữ liệu từ Google Drive đã được lưu vào trình duyệt.
+                            Kết nối trực tiếp Google Drive API không cần bộ nhớ tạm.
                         </p>
                         <div class="flex items-center justify-between text-xs font-semibold pt-2 border-t border-slate-200/60 dark:border-slate-700/50">
-                            <span class="text-slate-500 dark:text-slate-400">Lưu cho:</span>
-                            <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">drive_cache_th & mn</span>
+                            <span class="text-slate-500 dark:text-slate-400">Phương thức:</span>
+                            <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">Direct Live Fetch</span>
                         </div>
                     </div>
                 </div>
@@ -537,8 +655,8 @@
                         <i class="ph-bold ph-graduation-cap"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">Hệ Thống Kho Tài Liệu Số</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Trang chủ trung gian điều hướng</p>
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">Hệ Thống Kho Tài Liệu Số & AI Sư Phạm</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Trang chủ điều hướng trung tâm</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -546,7 +664,7 @@
                         <i class="ph-bold ph-book-open text-sm"></i> Hướng dẫn
                     </button>
                     <span>•</span>
-                    <button onclick="clearCacheAndReload()" class="hover:text-pastel-500 transition-colors">Làm mới Cache</button>
+                    <button onclick="location.reload()" class="hover:text-pastel-500 transition-colors">Tải lại trang</button>
                     <span>•</span>
                     <span class="text-slate-400 dark:text-slate-500 font-medium">Nh4tHuy</span>
                 </div>
@@ -566,9 +684,9 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <h3 class="text-base sm:text-lg font-bold">Hướng Dẫn</h3>
+                            <h3 class="text-base sm:text-lg font-bold">Hướng Dẫn Nhanh</h3>
                         </div>
-                        <p class="text-xs text-white/90">Các bước thao tác tìm kiếm dữ liệu trên web.</p>
+                        <p class="text-xs text-white/90">Các bước truy cập kho tài liệu & sử dụng trợ lý AI.</p>
                     </div>
                 </div>
                 <button onclick="closeGuideModal()" class="w-9 h-9 rounded-full bg-white/20 hover:bg-rose-500 flex items-center justify-center text-white transition-colors text-base">
@@ -585,11 +703,11 @@
                     </div>
                     <div class="flex-1">
                         <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                            <span>Chọn Web App Lưu Trữ</span>
-                            <i class="ph-bold ph-folders text-pastel-500 text-xs"></i>
+                            <span>Chọn Ứng Dụng Hoặc Trợ Lý AI</span>
+                            <i class="ph-bold ph-squares-four text-pastel-500 text-xs"></i>
                         </h4>
                         <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                            Bấm nút <b>Truy cập</b> tại thẻ <b>Tài Nguyên & Bài Giảng Lớp 2</b> hoặc <b>Tài Nguyên Năm Học Mầm Non</b>. Sẽ được chuyển ngay đến trang lưu trữ trực tiếp.
+                            Bấm nút <b>Truy cập</b> tại các thẻ ứng dụng: <b>Lớp 2</b>, <b>Mầm Non</b>, <b>AI Viết Giáo Án</b> hoặc <b>AI Thẩm Định Giáo Án</b>.
                         </p>
                     </div>
                 </div>
@@ -601,11 +719,11 @@
                     </div>
                     <div class="flex-1">
                         <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                            <span>Tìm kiếm nhanh dữ liệu</span>
+                            <span>Tìm kiếm & Tải tệp Kế hoạch</span>
                             <i class="ph-bold ph-magnifying-glass text-sky-500 text-xs"></i>
                         </h4>
                         <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                            Nhập từ khóa bài giảng hoặc kế hoạch vào ô <b>"Tìm dữ liệu..."</b> sau đó nhấn nút <b>"Tìm kiếm"</b> hoặc phím <b>Enter</b> để tìm.
+                            Với kho lưu trữ: tìm kiếm theo từ khóa bài học. Với web app AI Viết Giáo Án: tải lên tệp Kế hoạch mẫu (.docx, .pdf) ở Widget bên trái.
                         </p>
                     </div>
                 </div>
@@ -617,11 +735,11 @@
                     </div>
                     <div class="flex-1">
                         <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                            <span>Xem trước trực tuyến tài liệu</span>
-                            <i class="ph-bold ph-eye text-amber-500 text-xs"></i>
+                            <span>Sử dụng Lệnh Nhanh AI</span>
+                            <i class="ph-bold ph-sparkle text-amber-500 text-xs"></i>
                         </h4>
                         <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                            Nhấp trực tiếp vào tên tệp hoặc nút <b>Xem trước (Màu cam)</b> để xem nhanh tài liệu, slide bài giảng trước khi chọn tải về máy.
+                            Bấm vào nút <b>✨ Lệnh Nhanh</b> để chọn câu lệnh tạo KHGD Chủ đề, KHGD Tuần hoặc Giáo án chi tiết từng ngày cực kỳ nhanh chóng.
                         </p>
                     </div>
                 </div>
@@ -633,11 +751,11 @@
                     </div>
                     <div class="flex-1">
                         <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                            <span>Tải về & đồng bộ Google Drive</span>
-                            <i class="ph-bold ph-download-simple text-emerald-500 text-xs"></i>
+                            <span>Sao chép & Tải về sử dụng</span>
+                            <i class="ph-bold ph-copy text-emerald-500 text-xs"></i>
                         </h4>
                         <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                            Bấm vào nút <b>Tải về (Màu xanh)</b> khi muốn lưu tệp về máy tính.
+                            Nhấn nút <b>"Sao Chép Toàn Bộ"</b> để dán giáo án sang Microsoft Word hoặc tải file bài giảng trực tiếp về máy.
                         </p>
                     </div>
                 </div>
@@ -652,13 +770,13 @@
 
                 <!-- 2 Nút hành động: Xem Video và Đóng -->
                 <div class="flex items-center gap-2.5 w-full sm:w-auto order-1 sm:order-2">
-                    <!-- Nút 1: Xem Video (Mở link video) -->
+                    <!-- Nút 1: Xem Video -->
                     <a href="https://drive.google.com/file/d/1QpuxzLhplA80WF45zImimZ7f9okidtaW/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-bold text-xs sm:text-sm transition-all shadow-sm hover:scale-[1.02] active:scale-95">
                         <i class="ph-fill ph-play-circle text-base"></i>
                         <span>Xem Video hướng dẫn</span>
                     </a>
 
-                    <!-- Nút 2: Đóng (Tắt popup) -->
+                    <!-- Nút 2: Đóng -->
                     <button onclick="closeGuideModal()" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm transition-all active:scale-95">
                         <i class="ph-bold ph-x text-sm"></i>
                         <span>Đóng</span>
@@ -672,18 +790,12 @@
     <!-- SCRIPT SECTION -->
     <script>
         // =========================================================================
-        // CẤU HÌNH ĐƯỜNG DẪN ỨNG DỤNG VÀ APPS SCRIPT PREFETCH
+        // CẤU HÌNH ĐƯỜNG DẪN ỨNG DỤNG
         // =========================================================================
         const URL_APP1 = '/DataTH';         // Đường dẫn Web App Lớp 2
         const URL_APP2 = '/DataMN';         // Đường dẫn Web App Mầm Non
-
-        // Cấu hình Prefetch App Tiểu Học (Lớp 2):
-        const APPS_SCRIPT_URL_TH = 'https://script.google.com/macros/s/AKfycbxrKpuzuTMJfCc9p24iGdzk13udRNcDs51e3GNW1f9viCqGqC24PuZ_VYV5PlKqOUSf_A/exec';
-        const CACHE_STORAGE_KEY_TH = 'drive_cache_th';
-
-        // Cấu hình Prefetch App Mầm Non:
-        const APPS_SCRIPT_URL_MN = 'https://script.google.com/macros/s/AKfycbw5Bg2LjPzA0ERSlwQ5aiO9Yg4J4l_10K9GUASa4gdz6WZIacuvgDzzzkJa0FunHE-k/exec';
-        const CACHE_STORAGE_KEY_MN = 'drive_cache_mn';
+        const URL_APP3 = '/GiaoAn';     // Đường dẫn Web App AI Viết Giáo Án
+        const URL_APP4 = '/ThamDinh';       // Đường dẫn Web App AI Thẩm Định Giáo Án
 
         // Link video Google Drive
         const VIDEO_GUIDE_URL = 'https://drive.google.com/file/d/1QpuxzLhplA80WF45zImimZ7f9okidtaW/view?usp=sharing';
@@ -691,8 +803,13 @@
         // Gán link động cho các nút chuyển trang
         const btnApp1 = document.getElementById('btnApp1');
         const btnApp2 = document.getElementById('btnApp2');
+        const btnApp3 = document.getElementById('btnApp3');
+        const btnApp4 = document.getElementById('btnApp4');
+
         if (btnApp1) btnApp1.href = URL_APP1;
         if (btnApp2) btnApp2.href = URL_APP2;
+        if (btnApp3) btnApp3.href = URL_APP3;
+        if (btnApp4) btnApp4.href = URL_APP4;
 
         // Dark mode toggle listener
         document.getElementById('themeToggle').addEventListener('click', () => {
@@ -743,7 +860,7 @@
             }, 250);
         }
 
-        // Tự động mở bảng hướng dẫn 4 bước khi người dùng mới truy cập trang
+        // Tự động mở bảng hướng dẫn khi người dùng mới truy cập trang
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 openGuideModal(false);
@@ -788,136 +905,37 @@
         setInterval(updateRealTimeClocks, 1000);
         updateRealTimeClocks();
 
-        function updateCacheStatsDisplay() {
-            const cacheTH = localStorage.getItem(CACHE_STORAGE_KEY_TH) || '';
-            const cacheMN = localStorage.getItem(CACHE_STORAGE_KEY_MN) || '';
-
-            const sizeTH_KB = (new Blob([cacheTH]).size / 1024).toFixed(1);
-            const sizeMN_KB = (new Blob([cacheMN]).size / 1024).toFixed(1);
-            const totalKB = ((new Blob([cacheTH]).size + new Blob([cacheMN]).size) / 1024).toFixed(1);
-
-            const app1CacheSize = document.getElementById('app1CacheSize');
-            if (app1CacheSize) app1CacheSize.textContent = `${sizeTH_KB} KB`;
-
-            const app2CacheSize = document.getElementById('app2CacheSize');
-            if (app2CacheSize) app2CacheSize.textContent = `${sizeMN_KB} KB`;
-
-            const totalCacheSizeText = document.getElementById('totalCacheSizeText');
-            if (totalCacheSizeText) totalCacheSizeText.textContent = totalKB;
-
-            const storageStateBadge = document.getElementById('storageStateBadge');
-            if (storageStateBadge) {
-                if (parseFloat(totalKB) > 0) {
-                    storageStateBadge.textContent = 'Đã lưu đệm sẵn';
-                    storageStateBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300';
-                } else {
-                    storageStateBadge.textContent = 'Chưa có cache';
-                    storageStateBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
-                }
-            }
-        }
-
-        async function fetchAndCacheData(url, cacheKey, badgeElementId, appName) {
-            const badgeEl = document.getElementById(badgeElementId);
-            const startTime = performance.now();
-
-            try {
-                if (badgeEl) {
-                    badgeEl.innerHTML = `<i class="ph-bold ph-spinner animate-spin"></i> Đang tải ${appName}...`;
-                    badgeEl.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 flex items-center gap-1';
-                }
-
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json, text/plain, */*' },
-                    mode: 'cors'
-                });
-
-                if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-                
-                const rawText = await response.text();
-                const latency = Math.round(performance.now() - startTime);
-
-                // Lưu dữ liệu vào localStorage theo định dạng chuẩn của web con
-                localStorage.setItem(cacheKey, rawText);
-                localStorage.setItem(`${cacheKey}_time`, String(Date.now()));
-
-                const dataSizeKB = (new Blob([rawText]).size / 1024).toFixed(1);
-
-                if (badgeEl) {
-                    badgeEl.innerHTML = `<i class="ph-bold ph-check text-emerald-500"></i> Hoàn tất (${latency}ms)`;
-                    badgeEl.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 flex items-center gap-1';
-                }
-
-                updateCacheStatsDisplay();
-                return { success: true, latency, sizeKB: parseFloat(dataSizeKB) };
-            } catch (err) {
-                console.warn(`Lỗi khi nạp trước ${appName}:`, err);
-                const hasOldCache = !!localStorage.getItem(cacheKey);
-
-                if (badgeEl) {
-                    if (hasOldCache) {
-                        badgeEl.innerHTML = `<i class="ph-bold ph-hard-drive text-pastel-500"></i> Dùng cache cũ`;
-                        badgeEl.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-pastel-100 text-pastel-700 dark:bg-pastel-950/60 dark:text-pastel-300 flex items-center gap-1';
-                    } else {
-                        badgeEl.innerHTML = `<i class="ph-bold ph-warning text-amber-500"></i> Tải trực tiếp khi mở`;
-                        badgeEl.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 flex items-center gap-1';
-                    }
-                }
-                return { success: false, error: err };
-            }
-        }
-
-        async function runBackgroundPrefetch() {
-            const cacheStatusBadge = document.getElementById('cacheStatusBadge');
+        // Kiểm tra độ trễ đường truyền
+        async function measureNetworkSpeed() {
             const metricSpeedValue = document.getElementById('metricSpeedValue');
             const metricThroughput = document.getElementById('metricThroughput');
             const networkPingStatus = document.getElementById('networkPingStatus');
             const speedProgressBar = document.getElementById('speedProgressBar');
+            const refreshIcon = document.getElementById('refreshMetricsIcon');
 
-            // Cập nhật thống kê sơ bộ từ cache đã có sẵn (nếu có từ phiên trước)
-            updateCacheStatsDisplay();
+            if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
-            // Chạy đồng thời 2 luồng nạp ngầm
-            const [resTH, resMN] = await Promise.all([
-                fetchAndCacheData(APPS_SCRIPT_URL_TH, CACHE_STORAGE_KEY_TH, 'app1PrefetchBadge', 'TH'),
-                fetchAndCacheData(APPS_SCRIPT_URL_MN, CACHE_STORAGE_KEY_MN, 'app2PrefetchBadge', 'MN')
-            ]);
+            const startTime = performance.now();
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbxrKpuzuTMJfCc9p24iGdzk13udRNcDs51e3GNW1f9viCqGqC24PuZ_VYV5PlKqOUSf_A/exec', {
+                    method: 'HEAD',
+                    mode: 'no-cors'
+                });
+                const latency = Math.round(performance.now() - startTime);
 
-            // Cập nhật widget đo tốc độ mạng
-            const validLatencies = [];
-            let totalFetchedKB = 0;
-
-            if (resTH.success) {
-                validLatencies.push(resTH.latency);
-                totalFetchedKB += resTH.sizeKB;
-            }
-            if (resMN.success) {
-                validLatencies.push(resMN.latency);
-                totalFetchedKB += resMN.sizeKB;
-            }
-
-            if (validLatencies.length > 0) {
-                const avgLatency = Math.round(validLatencies.reduce((a, b) => a + b, 0) / validLatencies.length);
-                if (metricSpeedValue) metricSpeedValue.textContent = avgLatency;
-
-                if (metricThroughput) {
-                    const totalSeconds = avgLatency / 1000;
-                    const speedKBps = (totalFetchedKB / (totalSeconds || 1)).toFixed(1);
-                    metricThroughput.textContent = `${speedKBps} KB/s (${totalFetchedKB.toFixed(1)} KB)`;
-                }
+                if (metricSpeedValue) metricSpeedValue.textContent = latency;
+                if (metricThroughput) metricThroughput.textContent = 'Trực tiếp (Live Cloud)';
 
                 if (speedProgressBar) {
-                    // Càng nhanh (latency thấp) thanh càng đầy
-                    const progress = Math.max(15, Math.min(100, Math.round(100 - (avgLatency / 30))));
+                    const progress = Math.max(15, Math.min(100, Math.round(100 - (latency / 30))));
                     speedProgressBar.style.width = `${progress}%`;
                 }
 
                 if (networkPingStatus) {
-                    if (avgLatency < 800) {
+                    if (latency < 800) {
                         networkPingStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500 radar-pulse"></span> Tuyệt vời (< 800ms)';
                         networkPingStatus.className = 'inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300';
-                    } else if (avgLatency < 2000) {
+                    } else if (latency < 2000) {
                         networkPingStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-500 radar-pulse"></span> Ổn định (~1.5s)';
                         networkPingStatus.className = 'inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300';
                     } else {
@@ -925,42 +943,20 @@
                         networkPingStatus.className = 'inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300';
                     }
                 }
-
-                if (cacheStatusBadge) {
-                    cacheStatusBadge.innerHTML = `<i class="ph-fill ph-check-circle text-emerald-500"></i> Đã nạp xong 2 kho`;
-                }
-
-                showToast('Dữ liệu đã được lưu!');
-            } else {
-                if (cacheStatusBadge) {
-                    cacheStatusBadge.innerHTML = `<i class="ph-fill ph-warning-circle text-amber-500"></i> Dùng chế độ trực tiếp`;
-                }
+            } catch (err) {
+                if (metricSpeedValue) metricSpeedValue.textContent = '--';
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('animate-spin');
             }
         }
 
-        function refreshAllPrefetch() {
-            const refreshIcon = document.getElementById('refreshMetricsIcon');
-            if (refreshIcon) refreshIcon.classList.add('animate-spin');
-            
-            showToast('Đang làm mới cache và kiểm tra tốc độ...');
-            runBackgroundPrefetch().then(() => {
-                if (refreshIcon) refreshIcon.classList.remove('animate-spin');
-            });
+        function refreshMetrics() {
+            showToast('Đang đo lại tốc độ kết nối...');
+            measureNetworkSpeed();
         }
 
-        function clearCacheAndReload() {
-            localStorage.removeItem(CACHE_STORAGE_KEY_TH);
-            localStorage.removeItem(`${CACHE_STORAGE_KEY_TH}_time`);
-            localStorage.removeItem(CACHE_STORAGE_KEY_MN);
-            localStorage.removeItem(`${CACHE_STORAGE_KEY_MN}_time`);
-            localStorage.removeItem('hide_portal_guide_steps');
-            showToast('Đã xóa sạch Cache. Đang tải lại dữ liệu mới...');
-            updateCacheStatsDisplay();
-            refreshAllPrefetch();
-        }
-
-        // Khởi động chạy trước dữ liệu ngay khi web app mở
-        runBackgroundPrefetch();
+        // Đo độ trễ khi tải trang
+        measureNetworkSpeed();
 
         // Đóng modal khi click ra ngoài hoặc bấm Escape
         window.onclick = function(e) {
