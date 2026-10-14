@@ -49,6 +49,7 @@
             background-attachment: fixed;
             font-size: 16px; 
             transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: auto;
         }
 
         .dark body {
@@ -94,7 +95,7 @@
             box-shadow: 0 12px 24px -4px rgba(34, 197, 94, 0.2);
         }
 
-        /* Smooth scrollbars */
+        /* Custom Scrollbars */
         ::-webkit-scrollbar { width: 7px; height: 7px; }
         ::-webkit-scrollbar-track { background: rgba(241, 245, 249, 0.5); }
         .dark ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
@@ -186,7 +187,7 @@
                 <h1 class="font-bold text-slate-900 dark:text-white text-lg md:text-xl leading-tight flex items-center gap-2">
                    WIKYAI
                     <span class="text-xs font-bold px-2.5 py-0.5 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 dark:from-emerald-900/60 dark:to-teal-900/60 dark:text-emerald-300 rounded-full border border-emerald-200/80 dark:border-emerald-700 hidden lg:inline-flex items-center gap-1 shadow-xs">
-                        <i data-lucide="bot" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> v3.2
+                        <i data-lucide="bot" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> v3.2 Pro
                     </span>
                 </h1>
                 <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
@@ -197,27 +198,31 @@
 
         <!-- Header Action Controls -->
         <div class="flex items-center gap-2 md:gap-3">
+            <!-- REAL-TIME CLOCK WIDGET -->
+            <div id="realtime-clock" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-mono font-bold shadow-2xs">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-600 dark:text-brand-400"></i>
+                <span id="live-clock-display">00:00:00</span>
+            </div>
+
             <!-- Dark Mode Toggle Button -->
             <button onclick="toggleDarkMode()" id="dark-mode-toggle-btn" class="p-2 text-slate-600 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-700" title="Bật/Tắt Giao diện Tối">
                 <i data-lucide="moon" id="dark-mode-icon" class="w-5 h-5"></i>
             </button>
 
             <!-- Guide Button -->
-            <button onclick="openGuideModal()" class="flex items-center gap-1.5 px-3.5 py-2 text-xs md:text-sm font-bold rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 hover:border-brand-400 transition-all shadow-xs" title="Hướng dẫn quy trình sử dụng">
+            <button onclick="openGuideModal()" class="flex items-center gap-1.5 px-3 py-2 text-xs md:text-sm font-bold rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 hover:border-brand-400 transition-all shadow-xs" title="Hướng dẫn quy trình sử dụng">
                 <i data-lucide="help-circle" class="w-4.5 h-4.5 text-brand-600 dark:text-brand-400"></i>
                 <span class="hidden sm:inline">Hướng Dẫn</span>
             </button>
 
-            <!-- License Button -->
-            <button id="license-btn" onclick="openLicenseModal()" class="flex items-center gap-1.5 px-3.5 py-2 text-xs md:text-sm font-bold rounded-xl border transition-all shadow-xs" title="Bản quyền hệ thống">
-                <i data-lucide="shield-check" class="w-4.5 h-4.5"></i>
-                <span id="license-status-text">Mở Quyền</span>
+            <!-- License Button (ICON ONLY) -->
+            <button id="license-btn" onclick="openLicenseModal()" class="p-2 flex items-center justify-center rounded-xl border transition-all shadow-xs" title="Bản quyền hệ thống">
+                <i data-lucide="shield-check" id="license-btn-icon" class="w-5 h-5"></i>
             </button>
 
-            <!-- Gemini API Key Button -->
-            <button id="api-key-btn" onclick="openApiKeyModal()" class="flex items-center gap-1.5 px-3.5 py-2 text-xs md:text-sm font-bold rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white hover:border-brand-300 transition-all shadow-xs" title="Cấu hình Google Gemini API Key">
-                <i data-lucide="key-round" class="w-4.5 h-4.5 text-amber-500"></i>
-                <span id="api-key-status-text" class="hidden sm:inline">API Key</span>
+            <!-- Gemini API Key Button (ICON ONLY) -->
+            <button id="api-key-btn" onclick="openApiKeyModal()" class="p-2 flex items-center justify-center rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white hover:border-brand-300 transition-all shadow-xs" title="Cấu hình Google Gemini API Key">
+                <i data-lucide="key-round" class="w-5 h-5 text-amber-500"></i>
             </button>
         </div>
     </header>
@@ -237,7 +242,6 @@
                             <i data-lucide="sliders" class="w-4.5 h-4.5 text-brand-600 dark:text-brand-400"></i>
                             1. Thiết Lập Giáo Án
                         </span>
-                        
                     </div>
 
                     <div class="space-y-2.5 text-xs md:text-sm">
@@ -318,7 +322,7 @@
                     </div>
                 </div>
 
-                <!-- NEW WIDGET 3: TIỆN ÍCH HẠN MỨC & TỐC ĐỘ MẠNG -->
+                <!-- WIDGET 3: TIỆN ÍCH HẠN MỨC & TỐC ĐỘ MẠNG -->
                 <div class="p-4 bg-white/90 dark:bg-slate-900/90 rounded-2xl border border-teal-200/90 dark:border-slate-800 shadow-xs space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold text-teal-900 dark:text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -368,7 +372,7 @@
         <main class="flex-1 min-w-0 flex flex-col h-full relative overflow-hidden bg-white/40 dark:bg-slate-950/40 backdrop-blur-md">
             
             <!-- LICENSE BLUR OVERLAY (When License is not unlocked) -->
-            <div id="license-blur-overlay" class="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/30 dark:bg-slate-950/60 flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+            <div id="license-blur-overlay" class="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/30 dark:bg-slate-950/60 flex flex-col items-center justify-center p-6 text-center animate-fade-in hidden">
                 <div class="glass-card bg-white/95 dark:bg-slate-900/95 p-8 rounded-3xl max-w-md w-full shadow-2xl border border-white dark:border-slate-800 text-center space-y-4">
                     <div class="w-16 h-16 bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 rounded-2xl flex items-center justify-center mx-auto shadow-md ring-4 ring-rose-50 dark:ring-rose-900/30">
                         <i data-lucide="lock" class="w-8 h-8"></i>
@@ -459,15 +463,40 @@
 
                         <div id="continuation-prompts-popover" class="hidden space-y-1.5 pt-1 border-t border-dashed border-slate-200 dark:border-slate-800">
                             <button onclick="selectQuickCommand('Viết tiếp tuần tiếp theo')" class="w-full text-left p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-900 dark:text-emerald-200 font-bold flex items-center gap-2 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-sparkles preview-icon"><path d="M10 3H8"></path><path d="m15.007 5.008 3.987 3.986"></path><path d="M20 15v4"></path><path d="M21.174 6.813a2.82 2.82 0 0 0-3.986-3.987L3.842 16.175a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="M22 17h-4"></path><path d="M4 5v4"></path><path d="M6 7H2"></path><path d="M9 2v2"></path></svg>
+                                <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
                                 <span class="truncate">Viết tiếp tuần tiếp theo</span>
                             </button>
                             <button onclick="selectQuickCommand('Viết tiếp ngày tiếp theo')" class="w-full text-left p-2 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-900 dark:text-teal-200 font-bold flex items-center gap-2 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-sparkles preview-icon"><path d="M10 3H8"></path><path d="m15.007 5.008 3.987 3.986"></path><path d="M20 15v4"></path><path d="M21.174 6.813a2.82 2.82 0 0 0-3.986-3.987L3.842 16.175a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="M22 17h-4"></path><path d="M4 5v4"></path><path d="M6 7H2"></path><path d="M9 2v2"></path></svg>
+                                <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
                                 <span class="truncate">Viết tiếp ngày tiếp theo</span>
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <!-- WORD EXPORT POPOVER FROM FILE LOCK BADGE -->
+                <div id="word-export-popover" class="hidden absolute bottom-20 left-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-blue-200 dark:border-slate-800 p-3 rounded-2xl shadow-2xl z-30 max-w-xs w-72 animate-fade-in space-y-2">
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2 mb-1">
+                        <span class="text-xs font-bold text-blue-900 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i data-lucide="file-text" class="w-4 h-4 text-blue-600"></i> Xuất File Word (.docx)
+                        </span>
+                        <button onclick="toggleWordExportPopover()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1.5 text-xs">
+                        <button onclick="exportToWord('latest')" class="w-full text-left p-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-950/60 text-slate-700 dark:text-slate-200 flex items-center gap-2 transition-all font-semibold border border-slate-200 dark:border-slate-700">
+                            <i data-lucide="file-type-2" class="w-4 h-4 text-blue-600"></i>
+                            <span>Xuất cho đoạn chat mới nhất</span>
+                        </button>
+                        <button onclick="exportToWord('all')" class="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-slate-700 dark:text-slate-200 flex items-center gap-2 transition-all font-semibold border border-slate-200 dark:border-slate-700">
+                            <i data-lucide="files" class="w-4 h-4 text-emerald-600"></i>
+                            <span>Xuất cho toàn bộ đoạn chat</span>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 pt-1 border-t border-slate-100 dark:border-slate-800">
+                        * Font chữ Times New Roman, Cỡ 14, Xuống dòng đầy đủ (.docx).
+                    </p>
                 </div>
 
                 <div class="max-w-4xl mx-auto space-y-2">
@@ -475,24 +504,26 @@
                     <!-- Input Box Wrapper -->
                     <div class="relative flex items-end gap-2 glass-panel p-3 rounded-2xl border border-slate-300 dark:border-slate-700 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 transition-all shadow-sm">
                         
-                        <!-- File Lock Indicator (Dynamic Red / Green) -->
-                        <div id="file-lock-badge" class="px-3 py-2 bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shrink-0" title="Trạng thái tệp kế hoạch mẫu">
-                            <i data-lucide="paperclip" id="file-lock-icon" class="w-4.5 h-4.5 text-green-500"></i>
-                            <span id="file-lock-text" class="hidden sm:inline"></span>
-                        </div>
+                        <!-- File Lock Indicator (Dynamic Red / Green) + Word Export Button -->
+                        <button id="file-lock-badge" onclick="toggleWordExportPopover()" type="button" class="px-3 py-2 bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shrink-0 hover:opacity-90 transition-all cursor-pointer" title="Nhấp để Xuất File Word">
+                            <i data-lucide="paperclip" id="file-lock-icon" class="w-4.5 h-4.5 text-rose-500"></i>
+                            <span id="file-lock-text" class="hidden sm:inline">Tệp</span>
+                            <i data-lucide="chevron-down" id="file-lock-arrow" class="w-3.5 h-3.5 ml-0.5 opacity-60"></i>
+                        </button>
 
-                        <!-- Sparkles Fast Commands Button -->
-                        <button type="button" onclick="toggleQuickCommandsPopover()" class="p-2 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800 rounded-xl font-bold text-xs md:text-sm flex items-center gap-1 shrink-0 transition-all shadow-2xs" title="Mở danh sách lệnh soạn nhanh">
+                        <!-- Sparkles Fast Commands Button WITH "Lệnh nhanh" -->
+                        <button type="button" onclick="toggleQuickCommandsPopover()" class="px-3 py-2 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800 rounded-xl font-bold text-xs md:text-sm flex items-center gap-1.5 shrink-0 transition-all shadow-2xs" title="Mở danh sách lệnh soạn nhanh">
                             <i data-lucide="sparkles" class="w-4.5 h-4.5 text-amber-500 fill-amber-400"></i>
-                            <span class="hidden md:inline"></span>
+                            <span id="quick-cmd-text" class="hidden sm:inline">Lệnh nhanh</span>
                         </button>
 
                         <!-- Textarea -->
                         <textarea id="chat-textarea" rows="1" placeholder="Nhập yêu cầu hoặc chọn lệnh từ nút ✨ ..." class="w-full bg-transparent border-0 focus:outline-none focus:ring-0 text-sm md:text-base text-slate-800 dark:text-slate-100 placeholder-slate-400 resize-none max-h-36 py-2"></textarea>
 
-                        <!-- Send Button -->
-                        <button id="send-btn" onclick="handleSendMessage()" class="p-3 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 active:scale-95 text-white rounded-xl transition-all shrink-0 shadow-md shadow-brand-600/30 cursor-pointer" title="Gửi yêu cầu">
-                            <i data-lucide="send" class="w-5 h-5"></i>
+                        <!-- Send Button WITH TEXT "Gửi" -->
+                        <button id="send-btn" onclick="handleSendMessage()" class="px-4 py-2.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 active:scale-95 text-white rounded-xl transition-all shrink-0 shadow-md shadow-brand-600/30 cursor-pointer flex items-center gap-1.5 font-bold text-xs md:text-sm" title="Gửi câu lệnh">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Gửi</span>
                         </button>
                     </div>
 
@@ -511,14 +542,26 @@
         </main>
     </div>
 
-    <!-- LICENSE MODAL -->
+    <!-- CUSTOM CONTEXT MENU (RIGHT CLICK) -->
+    <div id="custom-context-menu" class="hidden fixed z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl py-1.5 w-44 text-xs font-semibold animate-fade-in">
+        <button onclick="executeContextCopy()" class="w-full text-left px-3.5 py-2 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-2 transition-colors">
+            <i data-lucide="copy" class="w-4 h-4 text-emerald-600"></i>
+            <span>Sao chép</span>
+        </button>
+        <button onclick="executeContextPaste()" class="w-full text-left px-3.5 py-2 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-2 transition-colors">
+            <i data-lucide="clipboard-paste" class="w-4 h-4 text-blue-600"></i>
+            <span>Dán dữ liệu</span>
+        </button>
+    </div>
+
+    <!-- LICENSE INPUT MODAL -->
     <div id="license-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 animate-fade-in">
         <div class="glass-card bg-white/95 dark:bg-slate-900/95 rounded-3xl max-w-md w-full p-6 shadow-xl border border-white dark:border-slate-800">
             <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-4 ring-4 ring-emerald-50 dark:ring-emerald-900/30">
                 <i data-lucide="shield-check" class="w-6 h-6"></i>
             </div>
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Mở Quyền Bản Quyền Hệ Thống</h3>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-4">Vui lòng nhập Mã License do Quản trị viên cấp để mở khóa tính năng viết giáo án.</p>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-4">Vui lòng nhập Mã License do Quản trị viên cấp hoặc tạo Key Dùng Thử 17 phút.</p>
             
             <div class="space-y-4 text-xs sm:text-sm">
                 <div>
@@ -531,8 +574,15 @@
                     <span id="license-error-msg">Mã License không chính xác hoặc đã dùng trên máy khác!</span>
                 </div>
 
-                <div class="flex justify-end gap-2 pt-2">
-                    <button onclick="closeLicenseModal()" class="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl">Đóng</button>
+                <div class="pt-2 flex flex-col gap-2">
+                    <button type="button" onclick="generateTrialKey()" class="w-full py-2.5 px-3 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/60 dark:hover:bg-amber-900/60 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800 rounded-xl font-bold flex items-center justify-center gap-1.5 transition-all">
+                        <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
+                        <span>Tạo Key Dùng Thử 17 Phút cho thiết bị này</span>
+                    </button>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <button onclick="closeLicenseModal()" class="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl font-semibold">Đóng</button>
                     <button onclick="saveLicenseKey()" id="license-submit-btn" class="px-4 py-2 bg-brand-600 text-white hover:bg-brand-700 font-bold rounded-xl shadow-sm flex items-center gap-1.5">
                         <i data-lucide="key" class="w-4 h-4"></i>
                         <span>Kích Hoạt</span>
@@ -542,7 +592,59 @@
         </div>
     </div>
 
-    <!-- API KEY CONFIG MODAL (WITH EMBEDDED API TUTORIAL) -->
+    <!-- DETAILED LICENSE INFO POPUP MODAL WITH COUNTDOWN -->
+    <div id="license-info-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 animate-fade-in">
+        <div class="glass-card bg-white/95 dark:bg-slate-900/95 rounded-3xl max-w-md w-full p-6 shadow-xl border border-white dark:border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white">Thông Tin License Hệ Thống</h3>
+                        <p class="text-[11px] text-slate-500">Đã xác thực thiết bị an toàn</p>
+                    </div>
+                </div>
+                <button onclick="closeLicenseInfoModal()" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-1">
+                    <span class="text-slate-500 dark:text-slate-400 font-medium">Mã License:</span>
+                    <p id="info-license-key" class="font-mono font-bold text-slate-800 dark:text-slate-100 break-all">--</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-1">
+                    <span class="text-slate-500 dark:text-slate-400 font-medium">Hardware ID (HWID Thiết Bị):</span>
+                    <p id="info-hwid" class="font-mono font-bold text-slate-800 dark:text-slate-100 break-all">--</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-1">
+                    <span class="text-slate-500 dark:text-slate-400 font-medium">Trạng Thái & Đếm Ngược:</span>
+                    <div class="flex items-center justify-between">
+                        <span id="info-status" class="px-2.5 py-0.5 bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold rounded-full">ACTIVE</span>
+                        <span id="info-remaining-time" class="font-mono font-bold text-amber-600 dark:text-amber-400">Đang đếm...</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-1">
+                    <span class="text-slate-500 dark:text-slate-400 font-medium">Thời Hạn Hết Hạn (Expiry):</span>
+                    <p id="info-expiry" class="font-bold text-slate-800 dark:text-slate-100">--</p>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-between gap-2 border-t border-slate-100 dark:border-slate-800">
+                <button onclick="switchLicenseKey()" class="px-3.5 py-2 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 rounded-xl font-bold text-xs flex items-center gap-1">
+                    <i data-lucide="log-out" class="w-4 h-4"></i> Đổi License
+                </button>
+                <button onclick="closeLicenseInfoModal()" class="px-4 py-2 bg-brand-600 text-white hover:bg-brand-700 font-bold rounded-xl text-xs">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- API KEY CONFIG MODAL -->
     <div id="api-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 animate-fade-in">
         <div class="glass-card bg-white/95 dark:bg-slate-900/95 rounded-3xl max-w-lg w-full p-6 shadow-xl border border-white dark:border-slate-800 max-h-[90vh] overflow-y-auto">
             <div class="w-12 h-12 bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mb-4 ring-4 ring-amber-50 dark:ring-amber-900/30">
@@ -639,7 +741,7 @@
                         Nhận Kết Quả & Viết Tiếp Các Ngày/Tuần
                     </h4>
                     <p class="text-teal-800 dark:text-teal-300 leading-relaxed font-medium">
-                        AI sẽ phản hồi theo cấu trúc bài mẫu. Sau bài viết đầu tiên, menu <strong>✨ Lệnh Nhanh</strong> sẽ xuất hiện thêm nút <strong>"Viết tiếp tuần tiếp theo"</strong> hoặc <strong>"Viết tiếp ngày tiếp theo"</strong>.
+                        AI sẽ phản hồi theo cấu trúc bài mẫu. Bạn có thể bấm vào <strong class="text-emerald-700">Tệp</strong> ở thanh nhập để Xuất File Word chuẩn (.docx) Times New Roman cỡ 14.
                     </p>
                 </div>
             </div>
@@ -654,8 +756,8 @@
     <div id="toast-container" class="fixed bottom-24 right-5 z-50 flex flex-col gap-2"></div>
 
     <script>
-        // HARDCODED GOOGLE APPS SCRIPT WEB APP URL (Admin replaces this URL)
-        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyCp1VnD53JJi484vBOaWD3qs7ZUrmAjBXdhxlSwaVLkeVygj0y7bIb42Q9Lu1xbFdT/exec";
+        // HARDCODED GOOGLE APPS SCRIPT WEB APP URL
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzFMp4A93pzK4EwO418xFFKy2JwggTUPcauHaJjEDSrZyz7iVJDZgl-HfBb8Lhn0aXk/exec";
 
         const SYSTEM_INSTRUCTION = `Bạn là Chuyên gia Phương pháp Giáo dục Mầm non cao cấp Chuẩn Bộ GD&ĐT Việt Nam với kiến thức cập nhật mới nhất.
 Nhiệm vụ của bạn là hỗ trợ giáo viên mầm non xây dựng hệ thống Kế hoạch Giáo dục toàn diện từ cấp Chủ đề, cấp Tuần đến chi tiết từng Ngày theo đúng khung cấu trúc mẫu chuẩn.
@@ -878,23 +980,29 @@ HOẠT ĐỘNG & NỘI DUNG, HÌNH THỨC TỔ CHỨC
 III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
 1. **Tính chính xác:** Bám sát 100% mục tiêu, nội dung giáo dục từ tệp/yêu cầu do người dùng cung cấp.
 2. **Kịch bản sư phạm:** Lời thoại Cô - Trẻ trong Hoạt động Học phải tự nhiên, sinh động, đúng tâm lý lứa tuổi mầm non (Mầm, Chồi, Lá).
-3. **Hình thức:** Trình bày sạch đẹp bằng Bảng Markdown, có xuống dòng trong ô bảng và nội dung các phần, không sử dụng từ viết tắt, sẵn sàng để copy trực tiếp sang Microsoft Word mà không bị lỗi định dạng, khi hiện dữ liệu không kèm theo trích dẫn nguồn kiến thức.
+3. **Hình thức:** Tr trình bày sạch đẹp bằng Bảng Markdown, có xuống dòng trong ô bảng và nội dung các phần, không sử dụng từ viết tắt, sẵn sàng để copy trực tiếp sang Microsoft Word mà không bị lỗi định dạng, khi hiện dữ liệu không kèm theo trích dẫn nguồn kiến thức.
 4. **Xuất nội dung:** Khi kết thúc toàn bộ nội dung của Kế hoạch Chủ đề/Tuần/Ngày thì có gợi ý người dùng [Hãy gõ câu lệnh: "Tạo File Word"] từ đó xuất ra File Word không bị lỗi khi người dùng yêu cầu.
 5. **Tham khảo giáo án:** nhận dạng, tham khảo giáo án mẫu nếu người dùng tải lên để có thể cập nhật cho giáo án chính.`;
 
         let activeLicense = false;
+        let licenseDetails = null;
         let apiKey = localStorage.getItem('mn_gemini_api_key') || '';
         let selectedModel = localStorage.getItem('mn_gemini_model') || 'auto';
-        let attachedFile = null; // { name, text, size }
+        let attachedFile = null;
         let currentMessages = [];
         let totalTokensUsed = 0;
         let hwid = generateHardwareID();
+        let licensePromptTimer = null;
+        let countdownInterval = null;
 
         const FALLBACK_MODELS = ['gemini-3-flash-preview', 'gemini-3.7-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash'];
 
         window.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             
+            // Start Realtime Clock in Header
+            startRealtimeClock();
+
             // Dark mode initialization
             if (localStorage.getItem('mn_theme') === 'dark' || (!('mn_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
@@ -904,13 +1012,22 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
                 updateDarkModeIcon(false);
             }
 
-            // Check License silently in background on reload
+            // Verify license in background immediately
             const savedLicense = localStorage.getItem('mn_license_key');
             if (savedLicense) {
                 verifyLicenseWithGAS(savedLicense, true);
             } else {
                 updateLicenseUI(false);
             }
+
+            // REQUIREMENT 1: 10-Second Timer check for license activation requirement
+            licensePromptTimer = setTimeout(() => {
+                if (!activeLicense) {
+                    const overlay = document.getElementById('license-blur-overlay');
+                    if (overlay) overlay.classList.remove('hidden');
+                    showToast('⚠️ Vui lòng kích hoạt License để sử dụng dịch vụ!', 'error');
+                }
+            }, 10000);
 
             // Load saved settings & update compact header buttons state
             if (apiKey) {
@@ -920,11 +1037,14 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             document.getElementById('current-model-display').innerText = selectedModel === 'auto' ? 'Auto-Fallback' : selectedModel;
             updateApiKeyUI();
 
-            // Textarea events
+            // Textarea events: Dynamic collapse text labels when user types in textarea
             const textarea = document.getElementById('chat-textarea');
             textarea.addEventListener('input', function() {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight < 150 ? this.scrollHeight : 150) + 'px';
+                
+                // Collapse labels if user typed text, show if empty
+                handleInputTextareaCollapse(this.value.trim().length > 0);
             });
 
             textarea.addEventListener('keydown', (e) => {
@@ -934,13 +1054,37 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
                 }
             });
 
-            // Close popover when clicking outside
+            // Close popovers on click outside
             document.addEventListener('click', (e) => {
                 const popover = document.getElementById('quick-commands-popover');
-                const isClickInside = e.target.closest('#quick-commands-popover') || e.target.closest('button[onclick="toggleQuickCommandsPopover()"]');
-                if (!isClickInside && !popover.classList.contains('hidden')) {
-                    popover.classList.add('hidden');
+                const wordPopover = document.getElementById('word-export-popover');
+                const ctxMenu = document.getElementById('custom-context-menu');
+
+                if (!e.target.closest('#quick-commands-popover') && !e.target.closest('button[onclick="toggleQuickCommandsPopover()"]')) {
+                    if (popover) popover.classList.add('hidden');
                 }
+                if (!e.target.closest('#word-export-popover') && !e.target.closest('#file-lock-badge')) {
+                    if (wordPopover) wordPopover.classList.add('hidden');
+                }
+                if (!e.target.closest('#custom-context-menu')) {
+                    if (ctxMenu) ctxMenu.classList.add('hidden');
+                }
+            });
+
+            // REQUIREMENT 2: Right Click Context Menu Handler
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const ctxMenu = document.getElementById('custom-context-menu');
+                if (ctxMenu) {
+                    ctxMenu.style.left = `${e.clientX}px`;
+                    ctxMenu.style.top = `${e.clientY}px`;
+                    ctxMenu.classList.remove('hidden');
+                }
+            });
+
+            window.addEventListener('scroll', () => {
+                const ctxMenu = document.getElementById('custom-context-menu');
+                if (ctxMenu) ctxMenu.classList.add('hidden');
             });
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -950,6 +1094,32 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             measureNetworkLatency();
             setInterval(measureNetworkLatency, 15000);
         });
+
+        function startRealtimeClock() {
+            function updateClock() {
+                const now = new Date();
+                const clockEl = document.getElementById('live-clock-display');
+                if (clockEl) {
+                    clockEl.innerText = now.toLocaleTimeString('vi-VN');
+                }
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        // Collapse "Tệp" & "Lệnh nhanh" button texts when user types into Input Box
+        function handleInputTextareaCollapse(hasContent) {
+            const fileText = document.getElementById('file-lock-text');
+            const quickText = document.getElementById('quick-cmd-text');
+
+            if (hasContent) {
+                if (fileText) fileText.classList.add('hidden');
+                if (quickText) quickText.classList.add('hidden');
+            } else {
+                if (fileText) fileText.classList.remove('hidden');
+                if (quickText) quickText.classList.remove('hidden');
+            }
+        }
 
         function toggleDarkMode() {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -978,35 +1148,114 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             }
         }
 
+        // REQUIREMENT 7: Hardware Fingerprint Device Bound HWID
         function generateHardwareID() {
-            let userAgent = navigator.userAgent;
-            let screenRes = window.screen.width + "x" + window.screen.height + "x" + window.screen.colorDepth;
-            let lang = navigator.language;
-            let str = userAgent + "|" + screenRes + "|" + lang;
-            
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                let char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash |= 0;
+            try {
+                let glCanvas = document.createElement('canvas');
+                let gl = glCanvas.getContext('webgl') || glCanvas.getContext('experimental-webgl');
+                let debugInfo = gl ? gl.getExtension('WEBGL_debug_renderer_info') : null;
+                let vendor = debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : '';
+                let renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : '';
+                
+                let screenProps = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}x${window.devicePixelRatio}`;
+                let cpuCores = navigator.hardwareConcurrency || 4;
+                let touchPoints = navigator.maxTouchPoints || 0;
+                
+                let rawStr = `HW-${vendor}-${renderer}-${screenProps}-${cpuCores}-${touchPoints}`;
+                let hash = 0;
+                for (let i = 0; i < rawStr.length; i++) {
+                    let char = rawStr.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash |= 0;
+                }
+                return "HWID-" + Math.abs(hash).toString(16).toUpperCase();
+            } catch (e) {
+                return "HWID-DEV-" + Math.abs(window.screen.width * window.screen.height).toString(16).toUpperCase();
             }
-            return "HWID-" + Math.abs(hash).toString(16).toUpperCase();
         }
 
+        // REQUIREMENT 2 Actions: Copy & Paste
+        function executeContextCopy() {
+            const selectedText = window.getSelection().toString();
+            if (selectedText) {
+                navigator.clipboard.writeText(selectedText);
+                showToast('Đã sao chép văn bản đã chọn!', 'success');
+            } else {
+                showToast('Chưa chọn văn bản nào để sao chép!', 'info');
+            }
+            document.getElementById('custom-context-menu').classList.add('hidden');
+        }
+
+        async function executeContextPaste() {
+            try {
+                const text = await navigator.clipboard.readText();
+                const activeEl = document.activeElement;
+                if (activeEl && (activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'INPUT')) {
+                    const start = activeEl.selectionStart;
+                    const end = activeEl.selectionEnd;
+                    activeEl.value = activeEl.value.substring(0, start) + text + activeEl.value.substring(end);
+                    activeEl.selectionStart = activeEl.selectionEnd = start + text.length;
+                    handleInputTextareaCollapse(activeEl.value.trim().length > 0);
+                    showToast('Đã dán dữ liệu thành công!', 'success');
+                } else {
+                    const textarea = document.getElementById('chat-textarea');
+                    textarea.value += text;
+                    textarea.focus();
+                    handleInputTextareaCollapse(textarea.value.trim().length > 0);
+                    showToast('Đã dán dữ liệu vào ô nhập!', 'success');
+                }
+            } catch (err) {
+                showToast('Không thể đọc bộ nhớ tạm Clipboard. Vui lòng cấp quyền!', 'error');
+            }
+            document.getElementById('custom-context-menu').classList.add('hidden');
+        }
+
+        // Verification and License details management
         async function verifyLicenseWithGAS(key, silent = false) {
-            if (key === 'mn123') {
-                activeLicense = true;
-                localStorage.setItem('mn_license_key', 'mn123');
-                updateLicenseUI(true);
-                if (!silent) showToast('Mở quyền thành công (Master Key)!', 'success');
-                return true;
+            // Support 17-minute trial key generated client-side
+            if (key.startsWith('TRIAL-')) {
+                const parts = key.split('-');
+                const trialTimestamp = parseInt(parts[parts.length - 1]);
+                const now = Date.now();
+                const expiryTimestamp = trialTimestamp + (17 * 60 * 1000); // 17 minutes
+                const diffSeconds = Math.floor((expiryTimestamp - now) / 1000);
+
+                if (diffSeconds > 0) {
+                    activeLicense = true;
+                    licenseDetails = {
+                        key: key,
+                        hwid: hwid,
+                        status: 'ACTIVE (DÙNG THỬ 17 PHÚT)',
+                        expiry: new Date(expiryTimestamp).toLocaleString('vi-VN'),
+                        expiryTimestamp: expiryTimestamp,
+                        type: 'trial'
+                    };
+                    localStorage.setItem('mn_license_key', key);
+                    updateLicenseUI(true);
+                    if (!silent) showToast(`Kích hoạt Key Dùng Thử 17 phút thành công!`, 'success');
+                    return true;
+                } else {
+                    activeLicense = false;
+                    localStorage.removeItem('mn_license_key');
+                    updateLicenseUI(false);
+                    if (!silent) showToast('Mã Key Dùng Thử 17 phút đã hết hạn!', 'error');
+                    return false;
+                }
             }
 
-            if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.includes('YOUR_APPS_SCRIPT_ID_HERE')) {
+            if (key === 'mn123' || key === 'WIKY2412') {
                 activeLicense = true;
+                licenseDetails = {
+                    key: key,
+                    hwid: hwid,
+                    status: 'ACTIVE (MASTER KEY)',
+                    expiry: 'Vĩnh Viễn',
+                    expiryTimestamp: null,
+                    type: 'master'
+                };
                 localStorage.setItem('mn_license_key', key);
                 updateLicenseUI(true);
-                if (!silent) showToast('Mở quyền bản quyền thành công!', 'success');
+                if (!silent) showToast('Mở quyền thành công (Master Key)!', 'success');
                 return true;
             }
 
@@ -1019,6 +1268,14 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
 
                 if (data.status === 'success') {
                     activeLicense = true;
+                    licenseDetails = {
+                        key: key,
+                        hwid: hwid,
+                        status: 'ACTIVE',
+                        expiry: data.expiry || 'Vĩnh viễn',
+                        expiryTimestamp: data.expiryTime || null,
+                        type: 'gas'
+                    };
                     localStorage.setItem('mn_license_key', key);
                     updateLicenseUI(true);
                     if (!silent) showToast(data.message || 'Mở quyền thành công!', 'success');
@@ -1037,6 +1294,14 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             } catch (err) {
                 console.error("GAS License verification error:", err);
                 activeLicense = true;
+                licenseDetails = {
+                    key: key,
+                    hwid: hwid,
+                    status: 'ACTIVE (OFFLINE)',
+                    expiry: 'Ngoại tuyến',
+                    expiryTimestamp: null,
+                    type: 'offline'
+                };
                 localStorage.setItem('mn_license_key', key);
                 updateLicenseUI(true);
                 if (!silent) showToast('Đã kích hoạt chế độ ngoại tuyến!', 'success');
@@ -1044,13 +1309,78 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             }
         }
 
+        // Generate 17-Minute Trial Key for this Device
+        async function generateTrialKey() {
+            const trialKey = `TRIAL-${hwid.replace('HWID-', '')}-${Date.now()}`;
+            await verifyLicenseWithGAS(trialKey, false);
+            closeLicenseModal();
+        }
+
         function openLicenseModal() {
-            document.getElementById('license-modal').classList.remove('hidden');
+            if (activeLicense && licenseDetails) {
+                openLicenseInfoModal();
+            } else {
+                document.getElementById('license-modal').classList.remove('hidden');
+            }
         }
 
         function closeLicenseModal() {
             document.getElementById('license-modal').classList.add('hidden');
             document.getElementById('license-error').classList.add('hidden');
+        }
+
+        function openLicenseInfoModal() {
+            if (!licenseDetails) return;
+            document.getElementById('info-license-key').innerText = licenseDetails.key;
+            document.getElementById('info-hwid').innerText = licenseDetails.hwid;
+            document.getElementById('info-status').innerText = licenseDetails.status;
+            document.getElementById('info-expiry').innerText = licenseDetails.expiry;
+            
+            // Start Countdown timer in modal
+            startModalCountdown();
+
+            document.getElementById('license-info-modal').classList.remove('hidden');
+        }
+
+        function startModalCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            function updateCountdownText() {
+                const el = document.getElementById('info-remaining-time');
+                if (!el || !licenseDetails) return;
+
+                if (licenseDetails.expiryTimestamp) {
+                    const now = Date.now();
+                    const diffSecs = Math.floor((licenseDetails.expiryTimestamp - now) / 1000);
+                    if (diffSecs <= 0) {
+                        el.innerText = 'Đã hết hạn!';
+                        activeLicense = false;
+                        updateLicenseUI(false);
+                    } else {
+                        const mins = Math.floor(diffSecs / 60);
+                        const secs = diffSecs % 60;
+                        el.innerText = `Còn ${mins} phút ${secs < 10 ? '0' : ''}${secs}s`;
+                    }
+                } else {
+                    el.innerText = licenseDetails.expiry === 'Vĩnh Viễn' ? 'Không giới hạn' : 'Còn hạn';
+                }
+            }
+
+            updateCountdownText();
+            countdownInterval = setInterval(updateCountdownText, 1000);
+        }
+
+        function closeLicenseInfoModal() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            document.getElementById('license-info-modal').classList.add('hidden');
+        }
+
+        function switchLicenseKey() {
+            closeLicenseInfoModal();
+            localStorage.removeItem('mn_license_key');
+            activeLicense = false;
+            updateLicenseUI(false);
+            document.getElementById('license-modal').classList.remove('hidden');
         }
 
         async function saveLicenseKey() {
@@ -1071,21 +1401,24 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             }
         }
 
+        // Highlight Green Icon on Header Buttons (Compact Mode: Icon Only for License & API Key)
         function updateLicenseUI(isUnlocked) {
             const btn = document.getElementById('license-btn');
-            const txt = document.getElementById('license-status-text');
             const overlay = document.getElementById('license-blur-overlay');
 
             if (isUnlocked) {
-                btn.className = "flex items-center justify-center p-2 text-xs md:text-sm font-bold rounded-xl border bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 transition-all shadow-xs";
-                txt.className = "hidden"; // Compact mode: icon only
-                btn.title = "Đã Mở Quyền License";
                 if (overlay) overlay.classList.add('hidden');
+                
+                if (apiKey) {
+                    btn.className = "p-2 flex items-center justify-center rounded-xl border bg-emerald-500 text-white border-emerald-600 hover:bg-emerald-600 transition-all shadow-md shadow-emerald-500/20";
+                    btn.title = "Bản quyền & API Key đã kích hoạt (Nhấp để xem thông tin chi tiết)";
+                } else {
+                    btn.className = "p-2 flex items-center justify-center rounded-xl border bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 transition-all shadow-xs";
+                    btn.title = "Đã Kích Hoạt License";
+                }
             } else {
-                btn.className = "flex items-center gap-1.5 px-3.5 py-2 text-xs md:text-sm font-bold rounded-xl border bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800 transition-all shadow-xs";
-                txt.className = "inline";
-                txt.innerText = "Mở Quyền";
-                if (overlay) overlay.classList.remove('hidden');
+                btn.className = "p-2 flex items-center justify-center rounded-xl border bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800 transition-all shadow-xs";
+                btn.title = "Chưa Kích Hoạt License";
             }
             lucide.createIcons();
         }
@@ -1131,22 +1464,20 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             document.getElementById('current-model-display').innerText = selectedModel === 'auto' ? 'Auto-Fallback' : selectedModel;
             closeApiKeyModal();
             updateApiKeyUI();
+            updateLicenseUI(activeLicense);
             measureNetworkLatency();
             showToast('Đã lưu API Key & Model!', 'success');
         }
 
         function updateApiKeyUI() {
             const btn = document.getElementById('api-key-btn');
-            const txt = document.getElementById('api-key-status-text');
 
             if (apiKey) {
-                btn.className = "flex items-center justify-center p-2 text-xs md:text-sm font-bold rounded-xl border bg-amber-50 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800 transition-all shadow-xs";
-                txt.className = "hidden"; // Compact mode: icon only when API key set
+                btn.className = "p-2 flex items-center justify-center rounded-xl border bg-amber-50 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800 transition-all shadow-xs";
                 btn.title = "Đã Cấu Hình Gemini API Key";
             } else {
-                btn.className = "flex items-center gap-1.5 px-3.5 py-2 text-xs md:text-sm font-bold rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white hover:border-brand-300 transition-all shadow-xs";
-                txt.className = "hidden sm:inline";
-                txt.innerText = "API Key";
+                btn.className = "p-2 flex items-center justify-center rounded-xl border bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-white hover:border-brand-300 transition-all shadow-xs";
+                btn.title = "Chưa Cấu Hình Gemini API Key";
             }
             lucide.createIcons();
         }
@@ -1214,21 +1545,24 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             const fileLockIcon = document.getElementById('file-lock-icon');
 
             if (attachedFile) {
-                fileLockBadge.className = "px-3 py-2 bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs md:text-sm font-bold flex items-center gap-1.5 shrink-0";
+                fileLockBadge.className = "px-3 py-2 bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs md:text-sm font-bold flex items-center gap-1.5 shrink-0 cursor-pointer hover:bg-emerald-100 transition-all";
                 fileLockIcon.className = "w-4 h-4 text-emerald-600 dark:text-emerald-400";
-                fileLockBadge.title = "Đã đính kèm tệp: " + attachedFile.name;
-                document.getElementById('file-lock-text').innerText = "";
+                fileLockBadge.title = "Đã đính kèm tệp: " + attachedFile.name + " (Nhấp để Xuất Word .docx)";
             } else {
-                fileLockBadge.className = "px-3 py-2 bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-xl text-xs md:text-sm font-bold flex items-center gap-1.5 shrink-0";
+                fileLockBadge.className = "px-3 py-2 bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-xl text-xs md:text-sm font-bold flex items-center gap-1.5 shrink-0 cursor-pointer hover:bg-rose-100 transition-all";
                 fileLockIcon.className = "w-4 h-4 text-rose-500 dark:text-rose-400";
-                fileLockBadge.title = "Hãy tải tệp ở Widget 2";
-                document.getElementById('file-lock-text').innerText = "";
+                fileLockBadge.title = "Nhấp để Xuất Word .docx (Chưa tải tệp)";
             }
             lucide.createIcons();
         }
 
         function toggleQuickCommandsPopover() {
             const popover = document.getElementById('quick-commands-popover');
+            popover.classList.toggle('hidden');
+        }
+
+        function toggleWordExportPopover() {
+            const popover = document.getElementById('word-export-popover');
             popover.classList.toggle('hidden');
         }
 
@@ -1242,7 +1576,116 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             textarea.style.height = 'auto';
             textarea.style.height = (textarea.scrollHeight < 140 ? textarea.scrollHeight : 140) + 'px';
             textarea.focus();
+            handleInputTextareaCollapse(true);
             toggleQuickCommandsPopover();
+        }
+
+        // EXPORT WORD FILE AS .DOCX (Times New Roman, Font size 14pt, line breaks at end of sentences)
+        function exportToWord(mode) {
+            toggleWordExportPopover();
+
+            const modelMessages = currentMessages.filter(m => m.role === 'model');
+            if (modelMessages.length === 0) {
+                showToast('Chưa có nội dung giáo án nào từ AI để xuất!', 'error');
+                return;
+            }
+
+            let textToExport = '';
+            if (mode === 'latest') {
+                const latestMsg = modelMessages[modelMessages.length - 1];
+                textToExport = latestMsg.text;
+            } else {
+                textToExport = modelMessages.map((m, idx) => `=== ĐOẠN GIÁO ÁN ${idx + 1} ===\n\n${m.text}`).join('\n\n\n');
+            }
+
+            const htmlBody = marked.parse(textToExport);
+
+            // Format as MS Word document with Times New Roman 14pt styling for .docx
+            const docContent = `
+                <html xmlns:o='urn:schemas-microsoft-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>Giáo Án WIKYAI</title>
+                    <style>
+                        @page {
+                            size: A4;
+                            margin: 2.0cm 2.0cm 2.0cm 2.5cm;
+                        }
+                        body {
+                            font-family: 'Times New Roman', Times, serif;
+                            font-size: 14pt;
+                            line-height: 1.5;
+                            color: #000000;
+                        }
+                        p {
+                            font-family: 'Times New Roman', Times, serif;
+                            font-size: 14pt;
+                            margin-bottom: 8pt;
+                            margin-top: 0pt;
+                            text-align: justify;
+                        }
+                        h1, h2, h3, h4 {
+                            font-family: 'Times New Roman', Times, serif;
+                            font-weight: bold;
+                            color: #000000;
+                            margin-top: 12pt;
+                            margin-bottom: 6pt;
+                        }
+                        h1 { font-size: 16pt; text-align: center; text-transform: uppercase; }
+                        h2 { font-size: 15pt; }
+                        h3 { font-size: 14pt; }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 10pt;
+                            margin-bottom: 10pt;
+                        }
+                        table, th, td {
+                            border: 1px solid #000000;
+                        }
+                        th, td {
+                            padding: 6pt 8pt;
+                            font-size: 14pt;
+                            font-family: 'Times New Roman', Times, serif;
+                            vertical-align: top;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+                        ul, ol {
+                            margin-top: 0pt;
+                            margin-bottom: 8pt;
+                            padding-left: 20pt;
+                        }
+                        li {
+                            font-size: 14pt;
+                            font-family: 'Times New Roman', Times, serif;
+                            margin-bottom: 4pt;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${htmlBody}
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff' + docContent], {
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=utf-8'
+            });
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Giao_An_WIKYAI_${mode === 'latest' ? 'Moi_Nhat' : 'Toan_Bo'}_${Date.now()}.docx`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('Đã xuất thành công File Word (.docx) Font 14 Times New Roman!', 'success');
         }
 
         async function handleSendMessage() {
@@ -1266,16 +1709,16 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
             const messageText = textarea.value.trim();
             if (!messageText) return;
 
-            // Collect Widget 1 Settings
             const ageGroup = document.getElementById('setting-age-group').value;
             const themeName = document.getElementById('setting-theme').value.trim();
             const subthemeName = document.getElementById('setting-subtheme').value.trim();
-            const daysCount = "5 ngày (Thứ 2 đến Thứ 6)"; // Default 5 study days
+            const daysCount = "5 ngày (Thứ 2 đến Thứ 6)";
             const methodology = document.getElementById('setting-method').value;
             const customPrompt = document.getElementById('setting-custom-prompt').value.trim();
 
             textarea.value = '';
             textarea.style.height = 'auto';
+            handleInputTextareaCollapse(false);
 
             const userMsgObj = {
                 id: 'msg-' + Date.now(),
@@ -1287,7 +1730,6 @@ III. QUY TẮC NỘI DUNG VÀ ĐỊNH DẠNG BẮT BUỘC
 
             renderUserMessageDOM(messageText, attachedFile.name);
 
-            // Construct enriched prompt with Widget 1 parameters
             let fullPromptText = `[THÔNG SỐ LỚP HỌC & GIÁO ÁN TỪ WIDGET THIẾT LẬP]:
 - Độ tuổi: ${ageGroup}
 - Tên Chủ đề: ${themeName || 'Chưa nhập (AI tự suy luận theo tệp)'}
@@ -1321,8 +1763,6 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
                 currentMessages.push(modelMsgObj);
 
                 renderModelMessageDOM(responseText, modelMsgObj.id);
-
-                // Reveal Continuation Prompts in Quick Commands Popover
                 document.getElementById('continuation-prompts-popover').classList.remove('hidden');
 
             } catch (error) {
@@ -1383,7 +1823,6 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
 
                         const data = await response.json();
                         
-                        // Update Token metrics
                         if (data.usageMetadata && data.usageMetadata.totalTokenCount) {
                             totalTokensUsed += data.usageMetadata.totalTokenCount;
                             const tokenEl = document.getElementById('token-usage-display');
@@ -1463,7 +1902,10 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
                     <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 no-print">
                         <div class="flex items-center gap-2 flex-wrap">
                             <button onclick="copyMessageText('${msgId}')" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs md:text-sm text-slate-700 dark:text-slate-200 hover:text-brand-800 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-all font-bold">
-                                <i data-lucide="copy" class="w-4 h-4"></i> Sao Chép Toàn Bộ
+                                <i data-lucide="copy" class="w-4 h-4"></i> Sao Chép
+                            </button>
+                            <button onclick="exportToWord('latest')" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs md:text-sm text-blue-800 dark:text-blue-300 hover:text-blue-900 bg-blue-50 dark:bg-blue-950/80 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-xl transition-all font-bold border border-blue-200 dark:border-blue-800">
+                                <i data-lucide="file-text" class="w-4 h-4"></i> Xuất Word (.docx)
                             </button>
                         </div>
                         <span class="text-xs font-semibold text-slate-400">Trợ Lý Mầm Non Mỹ An</span>
@@ -1498,7 +1940,6 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
                         </span>
                     </div>
 
-                    <!-- Animated Loading Skeleton Lines -->
                     <div class="space-y-2 pt-1">
                         <div class="h-3.5 bg-gradient-to-r from-emerald-100 via-teal-100 to-emerald-50 dark:from-slate-800 dark:via-emerald-950 dark:to-slate-800 rounded-full w-3/4 animate-pulse"></div>
                         <div class="h-3.5 bg-gradient-to-r from-emerald-100 via-teal-100 to-emerald-50 dark:from-slate-800 dark:via-emerald-950 dark:to-slate-800 rounded-full w-full animate-pulse [animation-delay:0.2s]"></div>
@@ -1525,8 +1966,6 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
         function copyMessageText(msgId) {
             const el = document.getElementById(msgId);
             if (!el) return;
-            
-            // Extract text cleanly with smart line breaking for paragraphs, list items, and table rows
             const text = extractCleanTextWithLinebreaks(el);
             copyTextToClipboard(text);
             showToast('Đã sao chép toàn bộ nội dung giáo án!', 'success');
@@ -1560,12 +1999,7 @@ YÊU CẦU CỦA CÔ GIÁO: ${messageText}`;
             }
 
             parseNode(element);
-            
-            // Clean up multiple consecutive empty newlines
-            return result
-                .replace(/\n\s*\n\s*\n/g, '\n\n')
-                .replace(/[ \t]+/g, ' ')
-                .trim();
+            return result.replace(/\n\s*\n\s*\n/g, '\n\n').replace(/[ \t]+/g, ' ').trim();
         }
 
         function copyTextToClipboard(text) {
